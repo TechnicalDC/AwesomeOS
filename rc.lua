@@ -118,7 +118,7 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 -- Keyboard map indicator and switcher
 mykeyboardlayout = awful.widget.keyboardlayout()
 
---  WIBAR
+--  WIBAR {{{
 -- Create a textclock widget
 mytextclock = wibox.widget.textclock()
 
@@ -230,7 +230,7 @@ awful.screen.connect_for_each_screen(function(s)
         },
     }
 end)
--- 
+-- }}}
 
 --  MOUSE BINDINGS {{{
 root.buttons(gears.table.join(
@@ -569,7 +569,7 @@ client.connect_signal("request::titlebars", function(c)
         end)
     )
 
-    awful.titlebar(c, {position = 'left'}) : setup {
+    awful.titlebar(c, {position = 'left', size = dpi(20)}) : setup {
         { -- Right
 			{
 				-- awful.titlebar.widget.stickybutton   (c),
