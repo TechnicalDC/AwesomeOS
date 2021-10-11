@@ -12,6 +12,7 @@ local themes_path = "/home/dilip/.config/awesome/theme/"
 local theme = {}
 
 theme.font          = "Roboto 8"
+theme.wallpaper     = themes_path.. "background/wallpaper.jpg"
 
 theme.titlebar_size = 20
 theme.wibar_width = 30

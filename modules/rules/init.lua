@@ -1,4 +1,6 @@
 
+-- RULES
+
 local gears = require("gears")
 local awful = require("awful")
 local wibox = require("wibox")									-- Widget and layout library
