@@ -14,7 +14,7 @@ local theme = {}
 theme.font          = "Roboto 8"
 theme.wallpaper     = themes_path.. "background/wallpaper.jpg"
 
-theme.titlebar_size = 20
+-- theme.titlebar_size = dpi(20)
 theme.wibar_width = 30
 
 theme.bg_normal     = "#282A36"

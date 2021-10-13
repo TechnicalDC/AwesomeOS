@@ -43,9 +43,9 @@ end
 
 --  VARIABLE DEFINITIONS {{{
 -- Themes define colours, icons, font and wallpapers.
+local dpi = beautiful.xresources.apply_dpi
 beautiful.init("/home/dilip/.config/awesome/theme/theme.lua")
 
-local dpi = beautiful.xresources.apply_dpi
 
 -- This is used later as the default terminal and editor to run.
 terminal = "urxvt"
@@ -140,27 +140,27 @@ local taglist_buttons = gears.table.join(
                     awful.button({ }, 5, function(t) awful.tag.viewprev(t.screen) end)
                 )
 
-local tasklist_buttons = gears.table.join(
-                     awful.button({ }, 1, function (c)
-                                              if c == client.focus then
-                                                  c.minimized = true
-                                              else
-                                                  c:emit_signal(
-                                                      "request::activate",
-                                                      "tasklist",
-                                                      {raise = true}
-                                                  )
-                                              end
-                                          end),
-                     awful.button({ }, 3, function()
-                                              awful.menu.client_list({ theme = { width = 250 } })
-                                          end),
-                     awful.button({ }, 4, function ()
-                                              awful.client.focus.byidx(1)
-                                          end),
-                     awful.button({ }, 5, function ()
-                                              awful.client.focus.byidx(-1)
-                                          end))
+-- local tasklist_buttons = gears.table.join(
+--                      awful.button({ }, 1, function (c)
+--                                               if c == client.focus then
+--                                                   c.minimized = true
+--                                               else
+--                                                   c:emit_signal(
+--                                                       "request::activate",
+--                                                       "tasklist",
+--                                                       {raise = true}
+--                                                   )
+--                                               end
+--                                           end),
+--                      awful.button({ }, 3, function()
+--                                               awful.menu.client_list({ theme = { width = 250 } })
+--                                           end),
+--                      awful.button({ }, 4, function ()
+--                                               awful.client.focus.byidx(1)
+--                                           end),
+--                      awful.button({ }, 5, function ()
+--                                               awful.client.focus.byidx(-1)
+--                                           end))
 
 local function set_wallpaper(s)
     -- Wallpaper
@@ -185,7 +185,7 @@ awful.screen.connect_for_each_screen(function(s)
     awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", "9" }, s, awful.layout.layouts[1])
 
     -- Create a promptbox for each screen
-    s.mypromptbox = awful.widget.prompt()
+    -- s.mypromptbox = awful.widget.prompt()
     -- Create an imagebox widget which will contain an icon indicating which layout we're using.
     -- We need one layoutbox per screen.
     s.mylayoutbox = awful.widget.layoutbox(s)
@@ -613,8 +613,8 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 -- awful.util.spawn("picom --experimental-backends")
 awful.util.spawn("nm-applet")
 -- awful.util.spawn("nitrogen --restore")
-awful.util.spawn("feh --bg-fill ~/.config/awesome/theme/background/wallpaper.jpg")
+awful.util.spawn("feh --bg-fill /home/dilip/.config/awesome/theme/background/wallpaper.jpg")
 awful.util.spawn("kdeconnect-indicator")
-awful.util.spawn("volumeicon")
+-- awful.util.spawn("volumeicon")
 
 -- }}}
