@@ -79,9 +79,6 @@ awful.layout.layouts = {
 }
 -- }}}
 
--- Keyboard map indicator and switcher
--- mykeyboardlayout = awful.widget.keyboardlayout()
-
 --  WIBAR {{{
 -- Create a textclock widget
 mytextclock = wibox.widget.textclock(" %H\n %M")
@@ -142,6 +139,7 @@ awful.screen.connect_for_each_screen(function(s)
         buttons = taglist_buttons,
 		placement = awful.placement.centered,
 		layout = wibox.layout.fixed.vertical,
+		align = 'center'
     }
 
     -- Create the wibox
@@ -425,7 +423,7 @@ awful.rules.rules = {
                      keys = clientkeys,
                      buttons = clientbuttons,
                      screen = awful.screen.preferred,
-					 placement = awful.placement.centered + awful.placement.no_offscreen
+					 placement = awful.placement.under_mouse + awful.placement.no_offscreen
      }
     },
 
@@ -527,7 +525,7 @@ client.connect_signal("request::titlebars", function(c)
 				layout = wibox.layout.fixed.vertical
 			},
 			margin = dpi(10),
-			widget = wibox.container.margin
+			widget = wibox.container.background
 		},
         layout = wibox.layout.align.vertical
     }
