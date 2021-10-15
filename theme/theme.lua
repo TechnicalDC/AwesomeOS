@@ -43,8 +43,12 @@ theme.titlebar_fg_normal = "#F8F8F2"
 
 theme.taglist_bg_focus = theme.bg_focus
 theme.taglist_fg_focus = theme.fg_focus
+theme.taglist_bg_urgent = theme.bg_urgent
+theme.taglist_fg_urgent = theme.fg_urgent
 theme.taglist_bg_occupied = theme.bg_normal 
 theme.taglist_fg_occupied = theme.border_normal
+theme.taglist_spacing = 5
+theme.taglist_font = "Iosevka Nerd Font 10"
 
 -- There are other variable sets
 -- overriding the default one when

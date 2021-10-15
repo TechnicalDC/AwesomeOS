@@ -17,7 +17,7 @@ local has_fdo, freedesktop = pcall(require, "freedesktop")
 -- }}}
 
 -- MY {{{
-
+require('modules.tags')
 require('modules.notification')
 -- }}}
 
@@ -130,6 +130,7 @@ awful.screen.connect_for_each_screen(function(s)
 
     -- Each screen has its own tag table.
     awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", "9" }, s, awful.layout.layouts[1])
+	-- addtags(s)
 
     s.mylayoutbox = awful.widget.layoutbox(s)
     s.mylayoutbox:buttons(gears.table.join(
