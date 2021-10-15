@@ -61,9 +61,9 @@ altkey = "Mod1"
 -- LAYOUTS {{{
 awful.layout.layouts = {
     awful.layout.suit.tile,
-    awful.layout.suit.tile.left,
+    -- awful.layout.suit.tile.left,
     awful.layout.suit.tile.bottom,
-    awful.layout.suit.tile.top,
+    -- awful.layout.suit.tile.top,
     awful.layout.suit.fair,
     -- awful.layout.suit.fair.horizontal,
     -- awful.layout.suit.spiral,
@@ -79,48 +79,16 @@ awful.layout.layouts = {
 }
 -- }}}
 
---  MENU {{{
--- Create a launcher widget and a main menu
-myawesomemenu = {
-   { "hotkeys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
-   { "manual", terminal .. " -e man awesome" },
-   { "edit config", editor_cmd .. " " .. awesome.conffile },
-   { "restart", awesome.restart },
-   { "quit", function() awesome.quit() end },
-}
-
-local menu_awesome = { "awesome", myawesomemenu, beautiful.awesome_icon }
-local menu_terminal = { "open terminal", terminal }
-
-if has_fdo then
-    mymainmenu = freedesktop.menu.build({
-        before = { menu_awesome },
-        after =  { menu_terminal }
-    })
-else
-    mymainmenu = awful.menu({
-        items = {
-                  menu_awesome,
-                  { "Debian", debian.menu.Debian_menu.Debian },
-                  menu_terminal,
-                }
-    })
-end
-
-
-mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
-                                     menu = mymainmenu })
-
--- Menubar configuration
-menubar.utils.terminal = terminal -- Set the terminal for applications that require it
--- }}}
-
 -- Keyboard map indicator and switcher
-mykeyboardlayout = awful.widget.keyboardlayout()
+-- mykeyboardlayout = awful.widget.keyboardlayout()
 
 --  WIBAR {{{
 -- Create a textclock widget
-mytextclock = wibox.widget.textclock()
+mytextclock = wibox.widget.textclock(" %H\n %M")
+
+-- Create a systray and make it vertical
+mysystray = wibox.widget.systray()
+mysystray.set_horizontal(false)
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
@@ -140,27 +108,6 @@ local taglist_buttons = gears.table.join(
                     awful.button({ }, 5, function(t) awful.tag.viewprev(t.screen) end)
                 )
 
--- local tasklist_buttons = gears.table.join(
---                      awful.button({ }, 1, function (c)
---                                               if c == client.focus then
---                                                   c.minimized = true
---                                               else
---                                                   c:emit_signal(
---                                                       "request::activate",
---                                                       "tasklist",
---                                                       {raise = true}
---                                                   )
---                                               end
---                                           end),
---                      awful.button({ }, 3, function()
---                                               awful.menu.client_list({ theme = { width = 250 } })
---                                           end),
---                      awful.button({ }, 4, function ()
---                                               awful.client.focus.byidx(1)
---                                           end),
---                      awful.button({ }, 5, function ()
---                                               awful.client.focus.byidx(-1)
---                                           end))
 
 local function set_wallpaper(s)
     -- Wallpaper
@@ -178,54 +125,40 @@ end
 screen.connect_signal("property::geometry", set_wallpaper)
 
 awful.screen.connect_for_each_screen(function(s)
-    -- Wallpaper
-    -- set_wallpaper(s)
 
     -- Each screen has its own tag table.
     awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", "9" }, s, awful.layout.layouts[1])
 
-    -- Create a promptbox for each screen
-    -- s.mypromptbox = awful.widget.prompt()
-    -- Create an imagebox widget which will contain an icon indicating which layout we're using.
-    -- We need one layoutbox per screen.
     s.mylayoutbox = awful.widget.layoutbox(s)
     s.mylayoutbox:buttons(gears.table.join(
                            awful.button({ }, 1, function () awful.layout.inc( 1) end),
                            awful.button({ }, 3, function () awful.layout.inc(-1) end),
                            awful.button({ }, 4, function () awful.layout.inc( 1) end),
                            awful.button({ }, 5, function () awful.layout.inc(-1) end)))
-    -- Create a taglist widget
+
     s.mytaglist = awful.widget.taglist {
         screen  = s,
         filter  = awful.widget.taglist.filter.all,
         buttons = taglist_buttons,
 		placement = awful.placement.centered,
-		-- layout = wibox.layout.fixed.vertical,
+		layout = wibox.layout.fixed.vertical,
     }
 
-    -- Create a tasklist widget
-    -- s.mytasklist = awful.widget.tasklist {
-    --     screen  = s,
-    --     filter  = awful.widget.tasklist.filter.currenttags,
-    --     buttons = tasklist_buttons
-    -- }
-
     -- Create the wibox
-    s.mywibox = awful.wibar({ position = "top", screen = s })
+    s.mywibox = awful.wibar({ position = "left", screen = s })
 
     -- Add widgets to the wibox
     s.mywibox:setup {
-        layout = wibox.layout.align.horizontal,
+        layout = wibox.layout.align.vertical,
         { -- Left widgets
-            layout = wibox.layout.fixed.horizontal,
+            layout = wibox.layout.fixed.vertical,
             s.mytaglist,
         },
-        s.mytasklist, -- Middle widget
+		nil,
         { -- Right widgets
-            layout = wibox.layout.fixed.horizontal,
-            -- mykeyboardlayout,
-            wibox.widget.systray(),
+            layout = wibox.layout.fixed.vertical,
             mytextclock,
+			mysystray,
             s.mylayoutbox,
         },
     }
@@ -492,7 +425,7 @@ awful.rules.rules = {
                      keys = clientkeys,
                      buttons = clientbuttons,
                      screen = awful.screen.preferred,
-					placement = awful.placement.centered + awful.placement.no_overlap
+					 placement = awful.placement.centered + awful.placement.no_offscreen
      }
     },
 
@@ -508,9 +441,7 @@ awful.rules.rules = {
           "Blueman-manager",
           "Gpick",
           "Kruler",
-          "MessageWin",  -- kalarm.
-          "Sxiv",
-          "Tor Browser", -- Needs a fixed window size to avoid fingerprinting by screen size.
+          "MessageWin", 
           "Wpa_gui",
           "veromix",
           "xtightvncviewer"},
@@ -518,14 +449,17 @@ awful.rules.rules = {
         -- Note that the name property shown in xprop might be set slightly after creation of the client
         -- and the name shown there might not match defined rules here.
         name = {
-          "Event Tester",  -- xev.
+          "Event Tester",  
         },
         role = {
-          "AlarmWindow",  -- Thunderbird's calendar.
-          "ConfigManager",  -- Thunderbird's about:config.
-          "pop-up",       -- e.g. Google Chrome's (detached) Developer Tools.
+          "AlarmWindow",  
+          "ConfigManager", 
+          "pop-up",      
         }
-      }, properties = { floating = true }},
+      }, properties = { 
+			floating = true,
+			placement = awful.placement.centered + awful.placement.no_offscreen
+		}},
 
     -- Add titlebars to normal clients and dialogs
     { rule_any = {type = { "normal", "dialog" }
@@ -588,7 +522,7 @@ client.connect_signal("request::titlebars", function(c)
 		},
 		{
 			{
-				awful.titlebar.widget.ontopbutton    (c),
+				awful.titlebar.widget.ontopbutton(c),
 				spacing = dpi(0),
 				layout = wibox.layout.fixed.vertical
 			},
@@ -615,6 +549,7 @@ awful.util.spawn("nm-applet")
 -- awful.util.spawn("nitrogen --restore")
 awful.util.spawn("feh --bg-fill /home/dilip/.config/awesome/theme/background/wallpaper.jpg")
 awful.util.spawn("kdeconnect-indicator")
+awful.util.spawn("/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1")
 -- awful.util.spawn("volumeicon")
 
 -- }}}

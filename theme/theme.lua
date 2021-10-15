@@ -1,6 +1,7 @@
 ---------------------------
 -- Default awesome theme --
 ---------------------------
+require("gears")
 
 local theme_assets = require("beautiful.theme_assets")
 local xresources = require("beautiful.xresources")
@@ -10,12 +11,13 @@ local gfs = require("gears.filesystem")
 local themes_path = "/home/dilip/.config/awesome/theme/"
 
 local theme = {}
+local icon_path = themes_path .. "icons"
+local background_path = themes_path .. "background"
 
 theme.font          = "Roboto 8"
 theme.wallpaper     = themes_path.. "background/wallpaper.jpg"
 
--- theme.titlebar_size = dpi(20)
-theme.wibar_width = 30
+theme.wibar_width = 20
 
 theme.bg_normal     = "#282A36"
 theme.bg_focus      = "#BD93F9"
@@ -58,7 +60,7 @@ theme.taglist_fg_occupied = theme.border_normal
 --theme.taglist_bg_focus = "#ff0000"
 
 -- Generate taglist squares:
-local taglist_square_size = dpi(1)
+local taglist_square_size = dpi(0)
 theme.taglist_squares_sel = theme_assets.taglist_squares_sel(
     taglist_square_size, theme.fg_normal
 )
@@ -115,8 +117,6 @@ theme.titlebar_maximized_button_focus_inactive  = themes_path.."icons/titlebar/m
 theme.titlebar_maximized_button_normal_active = themes_path.."icons/titlebar/maximize_normal.svg"
 theme.titlebar_maximized_button_focus_active  = themes_path.."icons/titlebar/maximize_focus.svg"
 
-theme.wallpaper = themes_path .."background.png"
-
 -- You can use your own layout icons like this:
 theme.layout_fairh = themes_path.."icons/layouts/fairwide.svg"
 theme.layout_fairv = themes_path.."icons/layouts/fair.svg"
@@ -139,6 +139,8 @@ theme.layout_dwindle = themes_path.."icons/layouts/dwindle.svg"
 theme.awesome_icon = theme_assets.awesome_icon(
     theme.menu_height, theme.bg_focus, theme.fg_focus
 )
+
+theme.hotkeys_border_color = theme.border_focus
 
 -- Define the icon theme for application icons. If not set then the icons
 -- from /usr/share/icons and /usr/share/icons/hicolor will be used.
