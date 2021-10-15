@@ -16,6 +16,11 @@ local debian = require("debian.menu")							-- Load Debian menu entries
 local has_fdo, freedesktop = pcall(require, "freedesktop")
 -- }}}
 
+-- MY {{{
+
+require('modules.notification')
+-- }}}
+
 --  ERROR HANDLING {{{
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
@@ -81,7 +86,7 @@ awful.layout.layouts = {
 
 --  WIBAR {{{
 -- Create a textclock widget
-mytextclock = wibox.widget.textclock(" %H\n %M")
+mytextclock = wibox.widget.textclock("<span size='large'>%H\n%M</span>")
 
 -- Create a systray and make it vertical
 mysystray = wibox.widget.systray()
@@ -137,9 +142,7 @@ awful.screen.connect_for_each_screen(function(s)
         screen  = s,
         filter  = awful.widget.taglist.filter.all,
         buttons = taglist_buttons,
-		placement = awful.placement.centered,
 		layout = wibox.layout.fixed.vertical,
-		align = 'center'
     }
 
     -- Create the wibox
@@ -149,15 +152,23 @@ awful.screen.connect_for_each_screen(function(s)
     s.mywibox:setup {
         layout = wibox.layout.align.vertical,
         { -- Left widgets
-            layout = wibox.layout.fixed.vertical,
-            s.mytaglist,
+			{
+				layout = wibox.layout.fixed.vertical,
+				wibox.container.place(s.mytaglist,{halign = 'center'})
+			},
+			margins = 4,
+			widget = wibox.container.margin,
         },
 		nil,
         { -- Right widgets
-            layout = wibox.layout.fixed.vertical,
-            mytextclock,
-			mysystray,
-            s.mylayoutbox,
+			{
+				layout = wibox.layout.fixed.vertical,
+				wibox.container.place(mytextclock,{halign = 'center'}),
+				wibox.container.place(mysystray,{halign = 'center'}),
+				s.mylayoutbox,
+			},
+			margins = 4,
+			widget = wibox.container.margin,
         },
     }
 end)
@@ -280,20 +291,6 @@ globalkeys = gears.table.join(
               end,
               {description = "restore minimized", group = "client"}),
 
-    -- Prompt
-    awful.key({ modkey },            "r",     function () awful.screen.focused().mypromptbox:run() end,
-              {description = "run prompt", group = "launcher"}),
-
-    awful.key({ modkey }, "x",
-              function ()
-                  awful.prompt.run {
-                    prompt       = "Run Lua code: ",
-                    textbox      = awful.screen.focused().mypromptbox.widget,
-                    exe_callback = awful.util.eval,
-                    history_path = awful.util.get_cache_dir() .. "/history_eval"
-                  }
-              end,
-              {description = "lua execute prompt", group = "awesome"}),
     -- Menubar
     awful.key({ modkey }, "p", function() menubar.show() end,
               {description = "show the menubar", group = "launcher"})
@@ -525,7 +522,7 @@ client.connect_signal("request::titlebars", function(c)
 				layout = wibox.layout.fixed.vertical
 			},
 			margin = dpi(10),
-			widget = wibox.container.background
+			widget = wibox.container.margin
 		},
         layout = wibox.layout.align.vertical
     }

@@ -17,7 +17,7 @@ local background_path = themes_path .. "background"
 theme.font          = "Roboto 8"
 theme.wallpaper     = themes_path.. "background/wallpaper.jpg"
 
-theme.wibar_width = 20
+theme.wibar_width = 26
 
 theme.bg_normal     = "#282A36"
 theme.bg_focus      = "#BD93F9"
