@@ -14,15 +14,23 @@ local theme = {}
 local icon_path = themes_path .. "icons"
 local background_path = themes_path .. "background"
 
+-- COLOR
+tBg = "#282A36"
+tRed = "#FF5555"
+tGreen = "#50FA7B"
+tYellow = "#F1FA8C"
+tPurple = "#BD93F9"
+tMagenta = "#FF79C6"
+tCyan = "#8BE9FD"
+
 theme.font          = "Roboto 8"
 theme.wallpaper     = themes_path.. "background/wallpaper.jpg"
 
 theme.wibar_width = 26
 
-theme.bg_normal     = "#282A36"
-theme.bg_focus      = "#BD93F9"
-theme.bg_urgent     = "#FF5555"
-theme.bg_minimize   = "#444444"
+theme.bg_normal     = tBg
+theme.bg_focus      = tPurple
+theme.bg_urgent     = tRed
 theme.bg_systray    = theme.bg_normal
 
 theme.fg_normal     = "#F8F8F2"
@@ -32,12 +40,12 @@ theme.fg_minimize   = "#F8F8F2"
 
 theme.useless_gap   = dpi(8)
 theme.border_width  = dpi(2)
-theme.border_normal = "#FF79C6"
-theme.border_focus  = "#BD93F9"
+theme.border_normal = tMagenta
+theme.border_focus  = tPurple
 theme.border_marked = "#91231c"
 
-theme.titlebar_bg_normal = "#282A36"
-theme.titlebar_bg_focus = "#282A36"
+theme.titlebar_bg_normal = tBg
+theme.titlebar_bg_focus = tBg
 theme.titlebar_fg_focus = "#F8F8F2"
 theme.titlebar_fg_normal = "#F8F8F2"
 
