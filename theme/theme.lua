@@ -26,7 +26,7 @@ tCyan = "#8BE9FD"
 theme.font          = "Roboto 8"
 theme.wallpaper     = themes_path.. "background/wallpaper.jpg"
 
-theme.wibar_width = 26
+theme.wibar_width = 30
 
 theme.bg_normal     = tBg
 theme.bg_focus      = tPurple
@@ -53,9 +53,10 @@ theme.taglist_bg_focus = theme.bg_focus
 theme.taglist_fg_focus = theme.fg_focus
 theme.taglist_bg_urgent = theme.bg_urgent
 theme.taglist_fg_urgent = theme.fg_urgent
-theme.taglist_bg_occupied = theme.bg_normal 
-theme.taglist_fg_occupied = theme.border_normal
-theme.taglist_spacing = 5
+theme.taglist_bg_occupied = tMagenta 
+theme.taglist_fg_occupied = theme.fg_normal
+theme.taglist_spacing = 0
+theme.taglist_disable_icon = false
 theme.taglist_font = "Iosevka Nerd Font 10"
 
 -- There are other variable sets
@@ -86,7 +87,7 @@ theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel(
 -- notification_[width|height|margin]
 -- notification_[border_color|border_width|shape|opacity]
 theme.notification_font = "Roboto 8"
-theme.notification_width = 200
+theme.notification_width = 300
 theme.notification_height = 70
 theme.notification_margin = dpi(20)
 

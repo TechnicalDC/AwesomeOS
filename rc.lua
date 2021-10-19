@@ -129,8 +129,8 @@ screen.connect_signal("property::geometry", set_wallpaper)
 awful.screen.connect_for_each_screen(function(s)
 
     -- Each screen has its own tag table.
-    awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", "9" }, s, awful.layout.layouts[1])
-	-- addtags(s)
+    -- awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", "9" }, s, awful.layout.layouts[1])
+	addtags(s)
 
     s.mylayoutbox = awful.widget.layoutbox(s)
     s.mylayoutbox:buttons(gears.table.join(
@@ -142,8 +142,8 @@ awful.screen.connect_for_each_screen(function(s)
     s.mytaglist = awful.widget.taglist {
         screen  = s,
         filter  = awful.widget.taglist.filter.all,
-        buttons = taglist_buttons,
 		layout = wibox.layout.fixed.vertical,
+        buttons = taglist_buttons,
     }
 
     -- Create the wibox
@@ -155,6 +155,7 @@ awful.screen.connect_for_each_screen(function(s)
         { -- Left widgets
 			{
 				layout = wibox.layout.fixed.vertical,
+				-- s.mytaglist
 				wibox.container.place(s.mytaglist,{halign = 'center'})
 			},
 			margins = 4,
@@ -167,6 +168,7 @@ awful.screen.connect_for_each_screen(function(s)
 				wibox.container.place(mytextclock,{halign = 'center'}),
 				wibox.container.place(mysystray,{halign = 'center'}),
 				s.mylayoutbox,
+				spacing = 2
 			},
 			margins = 4,
 			widget = wibox.container.margin,
@@ -177,7 +179,7 @@ end)
 
 --  MOUSE BINDINGS {{{
 root.buttons(gears.table.join(
-    awful.button({ }, 3, function () mymainmenu:toggle() end),
+    -- awful.button({ }, 3, function () mymainmenu:toggle() end),
     awful.button({ }, 4, awful.tag.viewnext),
     awful.button({ }, 5, awful.tag.viewprev)
 ))
@@ -188,7 +190,7 @@ globalkeys = gears.table.join(
 	-- Application keys
 	awful.key({modkey,			 }, "d", 
 		function ()
-			awful.util.spawn("rofi -show drun")
+			awful.util.spawn("rofi -show drun -theme /home/dilip/.config/rofi/themes/awesome.rasi")
 		end,
 		{description = "Launcg rofi", group = "apps"}),
 
@@ -197,6 +199,18 @@ globalkeys = gears.table.join(
 			awful.util.spawn("/home/dilip/.config/rofi/scripts/rofi-configmenu.sh")
 		end,
 		{description = "Launcg config menu", group = "apps"}),
+
+	awful.key({modkey, altkey}, "q", 
+		function ()
+			awful.util.spawn("/home/dilip/.config/rofi/scripts/rofi-quickmarks.sh")
+		end,
+		{description = "Launcg quickmarks menu", group = "apps"}),
+
+	awful.key({}, "Print", 
+		function ()
+			awful.util.spawn("/home/dilip/.config/rofi/scripts/rofi-scrotmenu.sh")
+		end,
+		{description = "Launcg scrot menu", group = "apps"}),
 
 	awful.key({modkey, altkey}, "r", 
 		function ()
@@ -421,7 +435,7 @@ awful.rules.rules = {
                      keys = clientkeys,
                      buttons = clientbuttons,
                      screen = awful.screen.preferred,
-					 placement = awful.placement.under_mouse + awful.placement.no_offscreen
+					 placement = awful.placement.centered + awful.placement.no_offscreen
      }
     },
 
@@ -509,7 +523,7 @@ client.connect_signal("request::titlebars", function(c)
 				spacing = dpi(0),
 				layout = wibox.layout.fixed.vertical
 			},
-			margin = dpi(10),
+			margins = 10,
 			widget = wibox.container.margin
         },
 		{
@@ -522,7 +536,7 @@ client.connect_signal("request::titlebars", function(c)
 				spacing = dpi(0),
 				layout = wibox.layout.fixed.vertical
 			},
-			margin = dpi(10),
+			margins = 10,
 			widget = wibox.container.margin
 		},
         layout = wibox.layout.align.vertical
@@ -547,5 +561,6 @@ awful.util.spawn("feh --bg-fill /home/dilip/.config/awesome/theme/background/wal
 awful.util.spawn("kdeconnect-indicator")
 awful.util.spawn("/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1")
 -- awful.util.spawn("volumeicon")
+awful.util.spawn("picom --config .config/picom/picom-noblur.conf --experimental-backends")
 
 -- }}}
