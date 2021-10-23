@@ -67,20 +67,10 @@ altkey = "Mod1"
 awful.layout.layouts = {
     awful.layout.suit.tile,
     -- awful.layout.suit.tile.left,
-    awful.layout.suit.tile.bottom,
+    -- awful.layout.suit.tile.bottom,
     -- awful.layout.suit.tile.top,
-    awful.layout.suit.fair,
-    -- awful.layout.suit.fair.horizontal,
-    -- awful.layout.suit.spiral,
-    -- awful.layout.suit.spiral.dwindle,
     awful.layout.suit.max,
-    -- awful.layout.suit.max.fullscreen,
     awful.layout.suit.floating,
-    -- awful.layout.suit.magnifier,
-    -- awful.layout.suit.corner.nw,
-    -- awful.layout.suit.corner.ne,
-    -- awful.layout.suit.corner.sw,
-    -- awful.layout.suit.corner.se,
 }
 -- }}}
 
@@ -109,6 +99,8 @@ local taglist_buttons = gears.table.join(
                     awful.button({ }, 4, function(t) awful.tag.viewnext(t.screen) end),
                     awful.button({ }, 5, function(t) awful.tag.viewprev(t.screen) end)
                 )
+
+-- local mybutton = 
 
 
 local function set_wallpaper(s)
@@ -152,16 +144,11 @@ awful.screen.connect_for_each_screen(function(s)
     -- Add widgets to the wibox
     s.mywibox:setup {
         layout = wibox.layout.align.vertical,
-        { -- Left widgets
-			{
-				layout = wibox.layout.fixed.vertical,
-				-- s.mytaglist
-				wibox.container.place(s.mytaglist,{halign = 'center'})
-			},
-			margins = 4,
-			widget = wibox.container.margin,
-        },
 		nil,
+        { -- Left widgets
+			layout = wibox.layout.fixed.vertical,
+			s.mytaglist
+        },
         { -- Right widgets
 			{
 				layout = wibox.layout.fixed.vertical,
@@ -246,8 +233,8 @@ globalkeys = gears.table.join(
         end,
         {description = "focus previous by index", group = "client"}
     ),
-    awful.key({ modkey,           }, "w", function () mymainmenu:show() end,
-              {description = "show main menu", group = "awesome"}),
+    -- awful.key({ modkey,           }, "w", function () mymainmenu:show() end,
+    --           {description = "show main menu", group = "awesome"}),
 
     -- Layout manipulation
     awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end,
@@ -516,9 +503,9 @@ client.connect_signal("request::titlebars", function(c)
     awful.titlebar(c, {position = 'left', size = dpi(20)}) : setup {
         { -- Right
 			{
-				-- awful.titlebar.widget.stickybutton   (c),
 				awful.titlebar.widget.closebutton    (c),
 				awful.titlebar.widget.maximizedbutton(c),
+				awful.titlebar.widget.stickybutton   (c),
 				awful.titlebar.widget.floatingbutton (c),
 				spacing = dpi(0),
 				layout = wibox.layout.fixed.vertical
@@ -539,7 +526,7 @@ client.connect_signal("request::titlebars", function(c)
 			margins = 10,
 			widget = wibox.container.margin
 		},
-        layout = wibox.layout.align.vertical
+        layout = wibox.layout.fixed.vertical
     }
 end)
 
@@ -554,13 +541,13 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 
 -- AUTOSTART {{{
 
--- awful.util.spawn("picom --experimental-backends")
 awful.util.spawn("nm-applet")
 -- awful.util.spawn("nitrogen --restore")
 awful.util.spawn("feh --bg-fill /home/dilip/.config/awesome/theme/background/wallpaper.jpg")
 awful.util.spawn("kdeconnect-indicator")
 awful.util.spawn("/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1")
 -- awful.util.spawn("volumeicon")
+-- awful.util.spawn("picom --experimental-backends")
 awful.util.spawn("picom --config .config/picom/picom-noblur.conf --experimental-backends")
 
 -- }}}

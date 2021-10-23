@@ -12,15 +12,15 @@ addtags = function(s)
 	tag_names = { "1","2","3","4","5","6","7","8","9",}
 
 	tag_icons = {
-		icon_path .. "web.svg",		-- 1 --
-		icon_path .. "dev.svg",		-- 2 --
-		icon_path .. "sys.svg",		-- 3 --
-		icon_path .. "chat.svg",	-- 4 --
-		icon_path .. "files.svg",	-- 5 --
-		icon_path .. "games.svg",	-- 6 --
-		icon_path .. "docs.svg",	-- 7 --
-		icon_path .. "music.svg",	-- 8 --
-		icon_path .. "video.svg",	-- 9 --
+		icon_path .. "web.png",		-- 1 --
+		icon_path .. "fav.png",		-- 2 --
+		icon_path .. "sys.png",		-- 3 --
+		icon_path .. "mail.png",	-- 4 --
+		icon_path .. "files.png",	-- 5 --
+		icon_path .. "games.png",	-- 6 --
+		icon_path .. "docs.png",	-- 7 --
+		icon_path .. "music.png",	-- 8 --
+		icon_path .. "video.png",	-- 9 --
 	}
 
 	local layouts = awful.layout.suit

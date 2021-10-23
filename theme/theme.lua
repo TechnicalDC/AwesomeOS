@@ -26,7 +26,7 @@ tCyan = "#8BE9FD"
 theme.font          = "Roboto 8"
 theme.wallpaper     = themes_path.. "background/wallpaper.jpg"
 
-theme.wibar_width = 30
+theme.wibar_width = 28
 
 theme.bg_normal     = tBg
 theme.bg_focus      = tPurple
@@ -49,15 +49,14 @@ theme.titlebar_bg_focus = tBg
 theme.titlebar_fg_focus = "#F8F8F2"
 theme.titlebar_fg_normal = "#F8F8F2"
 
-theme.taglist_bg_focus = theme.bg_focus
+theme.taglist_bg_focus = "#6C6E7A" 
 theme.taglist_fg_focus = theme.fg_focus
 theme.taglist_bg_urgent = theme.bg_urgent
 theme.taglist_fg_urgent = theme.fg_urgent
-theme.taglist_bg_occupied = tMagenta 
+theme.taglist_bg_occupied = "#4A4C58" 
 theme.taglist_fg_occupied = theme.fg_normal
 theme.taglist_spacing = 0
 theme.taglist_disable_icon = false
-theme.taglist_font = "Iosevka Nerd Font 10"
 
 -- There are other variable sets
 -- overriding the default one when
@@ -72,21 +71,12 @@ theme.taglist_font = "Iosevka Nerd Font 10"
 -- Example:
 --theme.taglist_bg_focus = "#ff0000"
 
--- Generate taglist squares:
-local taglist_square_size = dpi(0)
-theme.taglist_squares_sel = theme_assets.taglist_squares_sel(
-    taglist_square_size, theme.fg_normal
-)
-theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel(
-    taglist_square_size, theme.fg_normal
-)
-
 -- Variables set for theming notifications:
 -- notification_font
 -- notification_[bg|fg]
 -- notification_[width|height|margin]
 -- notification_[border_color|border_width|shape|opacity]
-theme.notification_font = "Roboto 8"
+theme.notification_font = theme.font
 theme.notification_width = 300
 theme.notification_height = 70
 theme.notification_margin = dpi(20)
@@ -143,15 +133,6 @@ theme.layout_tile = themes_path.."icons/layouts/tile.svg"
 theme.layout_tiletop = themes_path.."icons/layouts/tiletop.svg"
 theme.layout_spiral  = themes_path.."icons/layouts/spiral.svg"
 theme.layout_dwindle = themes_path.."icons/layouts/dwindle.svg"
--- theme.layout_cornernw = themes_path.."icons/layouts/cornernww.svg"
--- theme.layout_cornerne = themes_path.."icons/layouts/cornernew.svg"
--- theme.layout_cornersw = themes_path.."icons/layouts/cornersww.svg"
--- theme.layout_cornerse = themes_path.."icons/layouts/cornersew.svg"
-
--- Generate Awesome icon:
-theme.awesome_icon = theme_assets.awesome_icon(
-    theme.menu_height, theme.bg_focus, theme.fg_focus
-)
 
 theme.hotkeys_border_color = theme.border_focus
 
