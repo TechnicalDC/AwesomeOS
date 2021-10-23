@@ -309,6 +309,12 @@ clientkeys = gears.table.join(
               {description = "Quit window", group = "client"}),
     awful.key({ modkey, }, "s",  awful.client.floating.toggle                     ,
               {description = "Toggle floating", group = "client"}),
+
+	awful.key({modkey, "Shift"}, "s", 
+			function(c)
+				c.sticky = not c.sticky
+			end, {description = "Toggle sticky", group = "client"}),
+
     awful.key({ modkey, "Shift" }, "m", function (c) c:swap(awful.client.getmaster()) end,
               {description = "Move to master", group = "client"}),
     awful.key({ modkey,           }, "o",      function (c) c:move_to_screen()               end,
@@ -500,32 +506,33 @@ client.connect_signal("request::titlebars", function(c)
         end)
     )
 
-    awful.titlebar(c, {position = 'left', size = dpi(20)}) : setup {
+    awful.titlebar(c, {position = 'left', size = dpi(35)}) : setup {
         { -- Right
 			{
 				awful.titlebar.widget.closebutton    (c),
 				awful.titlebar.widget.maximizedbutton(c),
-				awful.titlebar.widget.stickybutton   (c),
+				-- awful.titlebar.widget.stickybutton   (c),
 				awful.titlebar.widget.floatingbutton (c),
-				spacing = dpi(0),
+				spacing = dpi(3),
 				layout = wibox.layout.fixed.vertical
 			},
-			margins = 10,
+			margins = 8,
 			widget = wibox.container.margin
         },
 		{
 			buttons = buttons,
 			layout = wibox.layout.align.vertical
 		},
-		{
-			{
-				awful.titlebar.widget.ontopbutton(c),
-				spacing = dpi(0),
-				layout = wibox.layout.fixed.vertical
-			},
-			margins = 10,
-			widget = wibox.container.margin
-		},
+		nil,
+		-- {
+		-- 	{
+		-- 		awful.titlebar.widget.ontopbutton(c),
+		-- 		spacing = dpi(3),
+		-- 		layout = wibox.layout.fixed.vertical
+		-- 	},
+		-- 	margins = 8,
+		-- 	widget = wibox.container.margin
+		-- },
         layout = wibox.layout.fixed.vertical
     }
 end)

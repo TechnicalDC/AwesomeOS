@@ -7,6 +7,13 @@ local naughty = require("naughty")
 
 local calendar = {}
 
+mycalendar = wibox.widget.calendar.month
+mycalendar.date = os.date("*t")
+
+mycalendar_popup = awful.popup {
+	mycalendar,
+}
+
 local calendar.toggle = function()
 
 end

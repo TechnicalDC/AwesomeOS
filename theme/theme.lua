@@ -44,11 +44,18 @@ theme.border_normal = tMagenta
 theme.border_focus  = tPurple
 theme.border_marked = "#91231c"
 
+-- CALENDAR
+theme.calendar_font = theme.font
+theme.calendar_start_sunday = true
+theme.calendar_long_wwekdays = true
+
+-- TITLEBAR
 theme.titlebar_bg_normal = tBg
 theme.titlebar_bg_focus = tBg
 theme.titlebar_fg_focus = "#F8F8F2"
 theme.titlebar_fg_normal = "#F8F8F2"
 
+-- TAGLIST
 theme.taglist_bg_focus = "#6C6E7A" 
 theme.taglist_fg_focus = theme.fg_focus
 theme.taglist_bg_urgent = theme.bg_urgent
@@ -71,6 +78,7 @@ theme.taglist_disable_icon = false
 -- Example:
 --theme.taglist_bg_focus = "#ff0000"
 
+-- NOTIFICATION
 -- Variables set for theming notifications:
 -- notification_font
 -- notification_[bg|fg]
