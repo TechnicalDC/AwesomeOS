@@ -1,8 +1,8 @@
 # AWESOMEOS
 
-<div style="
-left:50%
-"><img src="https://github.com/TechnicalDC/AwesomeOS/blob/main/images/aos.png" alt=""></div>
+<div align="center">
+	<img src="https://github.com/TechnicalDC/AwesomeOS/blob/main/images/aos.png" alt="">
+</div>
 
 > In progress...
 
