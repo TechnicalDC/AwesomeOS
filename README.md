@@ -1,5 +1,7 @@
 # AWESOMEOS
 
+<div><img src="https://github.com/TechnicalDC/AwesomeOS/blob/main/images/aos.png" alt=""></div>
+
 > In progress...
 
 ## Screenshot

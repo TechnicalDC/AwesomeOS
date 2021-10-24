@@ -447,6 +447,7 @@ awful.rules.rules = {
           "MessageWin", 
           "Wpa_gui",
           "veromix",
+		  "SimpleScreenRecorder",
           "xtightvncviewer"},
 
         -- Note that the name property shown in xprop might be set slightly after creation of the client
@@ -506,35 +507,68 @@ client.connect_signal("request::titlebars", function(c)
         end)
     )
 
-    awful.titlebar(c, {position = 'left', size = dpi(35)}) : setup {
-        { -- Right
-			{
-				awful.titlebar.widget.closebutton    (c),
-				awful.titlebar.widget.maximizedbutton(c),
-				-- awful.titlebar.widget.stickybutton   (c),
-				awful.titlebar.widget.floatingbutton (c),
-				spacing = dpi(3),
-				layout = wibox.layout.fixed.vertical
+	if c.type == "dialog" then
+		awful.titlebar(c, {position = 'left', size = dpi(35)}) : setup {
+			{ -- Right
+				{
+					awful.titlebar.widget.closebutton    (c),
+					-- awful.titlebar.widget.maximizedbutton(c),
+					-- awful.titlebar.widget.stickybutton   (c),
+					-- awful.titlebar.widget.floatingbutton (c),
+					spacing = dpi(3),
+					layout = wibox.layout.fixed.vertical
+				},
+				margins = 8,
+				widget = wibox.container.margin
 			},
-			margins = 8,
-			widget = wibox.container.margin
-        },
-		{
-			buttons = buttons,
-			layout = wibox.layout.align.vertical
-		},
-		nil,
-		-- {
-		-- 	{
-		-- 		awful.titlebar.widget.ontopbutton(c),
-		-- 		spacing = dpi(3),
-		-- 		layout = wibox.layout.fixed.vertical
-		-- 	},
-		-- 	margins = 8,
-		-- 	widget = wibox.container.margin
-		-- },
-        layout = wibox.layout.fixed.vertical
-    }
+			{
+				buttons = buttons,
+				layout = wibox.layout.align.vertical
+			},
+			nil,
+			-- {
+			-- 	{
+			-- 		awful.titlebar.widget.ontopbutton(c),
+			-- 		spacing = dpi(3),
+			-- 		layout = wibox.layout.fixed.vertical
+			-- 	},
+			-- 	margins = 8,
+			-- 	widget = wibox.container.margin
+			-- },
+			layout = wibox.layout.fixed.vertical
+		}
+	else
+
+		awful.titlebar(c, {position = 'left', size = dpi(35)}) : setup {
+			{ -- Right
+				{
+					awful.titlebar.widget.closebutton    (c),
+					awful.titlebar.widget.maximizedbutton(c),
+					-- awful.titlebar.widget.stickybutton   (c),
+					awful.titlebar.widget.floatingbutton (c),
+					spacing = dpi(3),
+					layout = wibox.layout.fixed.vertical
+				},
+				margins = 8,
+				widget = wibox.container.margin
+			},
+			{
+				buttons = buttons,
+				layout = wibox.layout.align.vertical
+			},
+			nil,
+			-- {
+			-- 	{
+			-- 		awful.titlebar.widget.ontopbutton(c),
+			-- 		spacing = dpi(3),
+			-- 		layout = wibox.layout.fixed.vertical
+			-- 	},
+			-- 	margins = 8,
+			-- 	widget = wibox.container.margin
+			-- },
+			layout = wibox.layout.fixed.vertical
+		}
+	end
 end)
 
 -- Enable sloppy focus, so that focus follows mouse.

@@ -113,10 +113,10 @@ theme.titlebar_ontop_button_focus_inactive  = themes_path.."icons/titlebar/ontop
 theme.titlebar_ontop_button_normal_active = themes_path.."icons/titlebar/ontop_normal.svg"
 theme.titlebar_ontop_button_focus_active  = themes_path.."icons/titlebar/ontop_focus.svg"
 
-theme.titlebar_sticky_button_normal_inactive = themes_path.."icons/titlebar/sticky_normal_inactive.png"
-theme.titlebar_sticky_button_focus_inactive  = themes_path.."icons/titlebar/sticky_focus_inactive.png"
-theme.titlebar_sticky_button_normal_active = themes_path.."icons/titlebar/sticky_normal_active.png"
-theme.titlebar_sticky_button_focus_active  = themes_path.."icons/titlebar/sticky_focus_active.png"
+theme.titlebar_sticky_button_normal_inactive = themes_path.."icons/titlebar/sticky_normal.svg"
+theme.titlebar_sticky_button_focus_inactive  = themes_path.."icons/titlebar/sticky_focus.svg"
+theme.titlebar_sticky_button_normal_active = themes_path.."icons/titlebar/sticky_normal.svg"
+theme.titlebar_sticky_button_focus_active  = themes_path.."icons/titlebar/sticky_focus.svg"
 
 theme.titlebar_floating_button_normal_inactive = themes_path.."icons/titlebar/floating_normal.svg"
 theme.titlebar_floating_button_focus_inactive  = themes_path.."icons/titlebar/floating_focus.svg"
