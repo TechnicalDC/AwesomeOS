@@ -1,4 +1,3 @@
-# AWESOMEOS
 
 <div align="center">
 	<img src="https://github.com/TechnicalDC/AwesomeOS/blob/main/images/aos.png" alt="">
