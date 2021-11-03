@@ -7,13 +7,41 @@ local naughty = require("naughty")
 
 local calendar = {}
 
-mycalendar = wibox.widget.calendar.month
-mycalendar.date = os.date("*t")
+calendar.create = function(screen)
+	-- Text clock widget for panel
+	mytextclock = wibox.widget.textclock("<span size='large'>%H\n%M</span>")
 
-mycalendar_popup = awful.popup {
-	mycalendar,
-}
+	awful.tooltip({
+		objects = {mytextclock},
+		mode = "outside",
+		align = "right",
+		timer_function = function()
+			return os.date(" %B %d, %Y ")
+		end,
+		preferred_positions = {"right", "left", "top", "bottom"},
+		margin_leftright = dpi(8),
+		margin_topbottom = dpi(8)
+   })
 
-local calendar.toggle = function()
+	mycalendar = wibox.widget.calendar.month(os.date("*t"))
 
+	cal_margin = wibox.container.margin(mycalendar, {margins = 5})
+
+	mycalendar_popup = awful.popup {
+		widget = cal_margin,
+		border_color = '#00ff00',
+		border_width = 2,
+		placement    = awful.placement.top_left(mycalendar_popup, { top = 10,}),
+		shape        = gears.shape.rounded_rect,
+		visible      = true,
+	}
+
+	mytextclock.connect_signal("button::press",function()
+		if button == 1 then
+			mycalendar_popup.visible = not mycalendar_popup.visible
+		end
+	end)
+
+	return mytextclock
 end
+

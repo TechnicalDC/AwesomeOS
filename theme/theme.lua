@@ -47,7 +47,7 @@ theme.border_marked = "#91231c"
 -- CALENDAR
 theme.calendar_font = theme.font
 theme.calendar_start_sunday = true
-theme.calendar_long_wwekdays = true
+theme.calendar_long_weekdays = true
 
 -- TITLEBAR
 theme.titlebar_bg_normal = tBg

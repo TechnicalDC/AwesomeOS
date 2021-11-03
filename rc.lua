@@ -18,6 +18,7 @@ local has_fdo, freedesktop = pcall(require, "freedesktop")
 
 -- MY {{{
 require('modules.tags')
+require('modules.calendar')
 require('modules.notification')
 -- }}}
 
@@ -77,6 +78,11 @@ awful.layout.layouts = {
 --  WIBAR {{{
 -- Create a textclock widget
 mytextclock = wibox.widget.textclock("<span size='large'>%H\n%M</span>")
+-- mytextclock.connect_signal("button::press", function(button)
+-- 	if button == 1 then
+-- 		awful.util.spawn("notify-send 'asdf' 'sfds'")
+-- 	end
+-- end)
 
 -- Create a systray and make it vertical
 mysystray = wibox.widget.systray()
@@ -512,9 +518,6 @@ client.connect_signal("request::titlebars", function(c)
 			{ -- Right
 				{
 					awful.titlebar.widget.closebutton    (c),
-					-- awful.titlebar.widget.maximizedbutton(c),
-					-- awful.titlebar.widget.stickybutton   (c),
-					-- awful.titlebar.widget.floatingbutton (c),
 					spacing = dpi(3),
 					layout = wibox.layout.fixed.vertical
 				},
@@ -538,14 +541,13 @@ client.connect_signal("request::titlebars", function(c)
 			layout = wibox.layout.fixed.vertical
 		}
 	else
-
 		awful.titlebar(c, {position = 'left', size = dpi(35)}) : setup {
 			{ -- Right
 				{
 					awful.titlebar.widget.closebutton    (c),
 					awful.titlebar.widget.maximizedbutton(c),
-					-- awful.titlebar.widget.stickybutton   (c),
 					awful.titlebar.widget.floatingbutton (c),
+					-- awful.titlebar.widget.stickybutton   (c),
 					spacing = dpi(3),
 					layout = wibox.layout.fixed.vertical
 				},
@@ -588,7 +590,7 @@ awful.util.spawn("feh --bg-fill /home/dilip/.config/awesome/theme/background/wal
 awful.util.spawn("kdeconnect-indicator")
 awful.util.spawn("/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1")
 -- awful.util.spawn("volumeicon")
--- awful.util.spawn("picom --experimental-backends")
-awful.util.spawn("picom --config .config/picom/picom-noblur.conf --experimental-backends")
+awful.util.spawn("picom --experimental-backends")
+-- awful.util.spawn("picom --config $HOME/.config/picom/picom-noblur.conf --experimental-backends")
 
 -- }}}
