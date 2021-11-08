@@ -4,10 +4,11 @@ local awful = require("awful")
 local wibox = require("wibox")			
 local beautiful = require("beautiful")	
 local naughty = require("naughty")		
+local dpi = beautiful.xresources.apply_dpi
 
-local calendar = {}
+calendar = {}
 
-calendar.create = function(screen)
+calendar.create = function(s)
 	-- Text clock widget for panel
 	mytextclock = wibox.widget.textclock("<span size='large'>%H\n%M</span>")
 
@@ -45,3 +46,4 @@ calendar.create = function(screen)
 	return mytextclock
 end
 
+return calendar

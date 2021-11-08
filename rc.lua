@@ -18,8 +18,8 @@ local has_fdo, freedesktop = pcall(require, "freedesktop")
 
 -- MY {{{
 require('modules.tags')
-require('modules.calendar')
-require('modules.notification')
+-- require('modules.calendar')
+-- require('modules.notification')
 -- }}}
 
 --  ERROR HANDLING {{{
@@ -144,6 +144,8 @@ awful.screen.connect_for_each_screen(function(s)
         buttons = taglist_buttons,
     }
 
+	-- calendar.create(s)
+
     -- Create the wibox
     s.mywibox = awful.wibar({ position = "left", screen = s })
 
@@ -204,6 +206,12 @@ globalkeys = gears.table.join(
 			awful.util.spawn("/home/dilip/.config/rofi/scripts/rofi-scrotmenu.sh")
 		end,
 		{description = "Launcg scrot menu", group = "apps"}),
+
+	awful.key({modkey, altkey}, "p",
+		function ()
+			awful.util.spawn("/home/dilip/.config/polybar/scripts/poly-picom.sh")
+		end,
+		{description = "Toggle picom", group = "apps"}),
 
 	awful.key({modkey, altkey}, "r", 
 		function ()
@@ -453,6 +461,7 @@ awful.rules.rules = {
           "MessageWin", 
           "Wpa_gui",
           "veromix",
+		  "Nm-connection-editor",
 		  "SimpleScreenRecorder",
           "xtightvncviewer"},
 
