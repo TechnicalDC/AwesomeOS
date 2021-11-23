@@ -16,7 +16,7 @@ naughty.config.defaults.border_width = 2
 naughty.config.defaults.border_color = tBg
 naughty.config.defaults.position = "top_right"
 naughty.config.defaults.shape = function(cr, w, h)
-		gears.shape.rounded_rect(cr, w, h, dpi(5))
+		gears.shape.rounded_rect(cr, w, h, dpi(10))
 end
 
 --

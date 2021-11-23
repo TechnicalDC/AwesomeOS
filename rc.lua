@@ -19,7 +19,8 @@ local has_fdo, freedesktop = pcall(require, "freedesktop")
 -- MY {{{
 require('modules.tags')
 -- require('modules.calendar')
--- require('modules.notification')
+-- require('modules.right-click-menu')
+require('modules.notification')
 -- }}}
 
 --  ERROR HANDLING {{{
@@ -67,11 +68,11 @@ altkey = "Mod1"
 -- LAYOUTS {{{
 awful.layout.layouts = {
     awful.layout.suit.tile,
-    -- awful.layout.suit.tile.left,
-    -- awful.layout.suit.tile.bottom,
-    -- awful.layout.suit.tile.top,
     awful.layout.suit.max,
     awful.layout.suit.floating,
+    awful.layout.suit.tile.left,
+    awful.layout.suit.tile.bottom,
+    awful.layout.suit.tile.top,
 }
 -- }}}
 
@@ -185,31 +186,43 @@ globalkeys = gears.table.join(
 	-- Application keys
 	awful.key({modkey,			 }, "d", 
 		function ()
-			awful.util.spawn("rofi -show drun -theme /home/dilip/.config/rofi/themes/awesome.rasi")
+			awful.util.spawn("rofi -show drun")
 		end,
 		{description = "Launcg rofi", group = "apps"}),
 
+	awful.key({modkey,			 }, "w", 
+		function ()
+			awful.util.spawn("rofi -show window")
+		end,
+		{description = "Launcg list open windows", group = "apps"}),
+
+	awful.key({modkey,			 }, "r", 
+		function ()
+			awful.util.spawn("rofi -show run")
+		end,
+		{description = "Launcg commands", group = "apps"}),
+
 	awful.key({modkey,			 }, "e", 
 		function ()
-			awful.util.spawn("/home/dilip/.config/rofi/scripts/rofi-configmenu.sh")
+			awful.util.spawn("/home/dilip/.scripts/rofi-configmenu.sh")
 		end,
 		{description = "Launcg config menu", group = "apps"}),
 
 	awful.key({modkey, altkey}, "q", 
 		function ()
-			awful.util.spawn("/home/dilip/.config/rofi/scripts/rofi-quickmarks.sh")
+			awful.util.spawn("/home/dilip/.scripts/rofi-quickmarks.sh")
 		end,
 		{description = "Launcg quickmarks menu", group = "apps"}),
 
 	awful.key({}, "Print", 
 		function ()
-			awful.util.spawn("/home/dilip/.config/rofi/scripts/rofi-scrotmenu.sh")
+			awful.util.spawn("/home/dilip/.scripts/rofi-scrotmenu.sh")
 		end,
 		{description = "Launcg scrot menu", group = "apps"}),
 
 	awful.key({modkey, altkey}, "p",
 		function ()
-			awful.util.spawn("/home/dilip/.config/polybar/scripts/poly-picom.sh")
+			awful.util.spawn("/home/dilip/.scripts/poly-picom.sh")
 		end,
 		{description = "Toggle picom", group = "apps"}),
 
@@ -224,6 +237,13 @@ globalkeys = gears.table.join(
 			awful.util.spawn(editor_cmd)
 		end,
 		{description = "Launcg ranger", group = "apps"}),
+
+	awful.key({modkey, altkey}, "s", 
+		function ()
+			awful.util.spawn("sxiv -rt .")
+		end,
+		{description = "Launcg ranger", group = "apps"}),
+
 
 	-- Other Keys
     awful.key({ modkey,           }, "F1",      hotkeys_popup.show_help,
@@ -319,7 +339,8 @@ clientkeys = gears.table.join(
             c:raise()
         end,
         {description = "toggle fullscreen", group = "client"}),
-    awful.key({ modkey, }, "q",      function (c) c:kill()                         end,
+
+    awful.key({ modkey, }, "q",      function (c) c:kill() end,
               {description = "Quit window", group = "client"}),
     awful.key({ modkey, }, "s",  awful.client.floating.toggle                     ,
               {description = "Toggle floating", group = "client"}),
@@ -335,31 +356,12 @@ clientkeys = gears.table.join(
               {description = "Move to screen", group = "client"}),
     awful.key({ modkey,           }, "t",      function (c) c.ontop = not c.ontop            end,
               {description = "Toggle keep on top", group = "client"}),
-    awful.key({ modkey,           }, "n",
-        function (c)
-            -- The client currently has the input focus, so it cannot be
-            -- minimized, since minimized clients can't have the focus.
-            c.minimized = true
-        end ,
-        {description = "minimize", group = "client"}),
     awful.key({ modkey,           }, "m",
         function (c)
             c.maximized = not c.maximized
             c:raise()
         end ,
         {description = "Toggle (un)maximize", group = "client"})
-    -- awful.key({ modkey, "Control" }, "f",
-    --     function (c)
-    --         c.maximized_vertical = not c.maximized_vertical
-    --         c:raise()
-    --     end ,
-    --     {description = "(un)maximize vertically", group = "client"}),
-    -- awful.key({ modkey, "Shift"   }, "m",
-    --     function (c)
-    --         c.maximized_horizontal = not c.maximized_horizontal
-    --         c:raise()
-    --     end ,
-    --     {description = "(un)maximize horizontally", group = "client"})
 )
 
 -- Bind all key numbers to tags.
@@ -442,6 +444,7 @@ awful.rules.rules = {
                      keys = clientkeys,
                      buttons = clientbuttons,
                      screen = awful.screen.preferred,
+					 size_hints_honor = false,
 					 placement = awful.placement.centered + awful.placement.no_offscreen
      }
     },
@@ -486,8 +489,16 @@ awful.rules.rules = {
     },
 
     -- Set Firefox to always map on the tag named "2" on screen 1.
-    -- { rule = { class = "Firefox" },
-    --   properties = { screen = 1, tag = "2" } },
+    { rule = { class = "mpv" },
+      properties = { 
+			titlebars_enabled = false,
+			placement = awful.placement.bottom_right,
+			sticky = true,
+			ontop = true,
+			width = 445,
+			height = 250,
+			floating = true
+	  } },
 }
 -- }}}
 
@@ -497,6 +508,9 @@ client.connect_signal("manage", function (c)
     -- Set the windows at the slave,
     -- i.e. put it at the end of others instead of setting it master.
     -- if not awesome.startup then awful.client.setslave(c) end
+	c.shape = function(cr, w, h)
+		gears.shape.rounded_rect(cr, w, h, 10)
+	end
 
     if awesome.startup
       and not c.size_hints.user_position
@@ -594,6 +608,7 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 -- AUTOSTART {{{
 
 awful.util.spawn("nm-applet")
+awful.util.spawn("xrandr -s 1360x768")
 -- awful.util.spawn("nitrogen --restore")
 awful.util.spawn("feh --bg-fill /home/dilip/.config/awesome/theme/background/wallpaper.jpg")
 awful.util.spawn("kdeconnect-indicator")
