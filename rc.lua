@@ -17,8 +17,9 @@ local has_fdo, freedesktop = pcall(require, "freedesktop")
 -- }}}
 
 -- MY {{{
+require('defaults')
 require('modules.tags')
--- require('modules.calendar')
+require('widgets.calendar')
 -- require('modules.right-click-menu')
 require('modules.notification')
 -- }}}
@@ -52,13 +53,6 @@ end
 -- Themes define colours, icons, font and wallpapers.
 local dpi = beautiful.xresources.apply_dpi
 beautiful.init("/home/dilip/.config/awesome/theme/theme.lua")
-
-
--- This is used later as the default terminal and editor to run.
-terminal = "urxvt"
-editor = os.getenv("EDITOR") or "nvim"
-filemanager = "ranger"
-editor_cmd = terminal .. " -e " .. editor
 
 -- Default modkey.
 modkey = "Mod4"
@@ -194,31 +188,31 @@ globalkeys = gears.table.join(
 		function ()
 			awful.util.spawn("rofi -show window")
 		end,
-		{description = "Launcg list open windows", group = "apps"}),
+		{description = "Launch list open windows", group = "apps"}),
 
 	awful.key({modkey,			 }, "r", 
 		function ()
 			awful.util.spawn("rofi -show run")
 		end,
-		{description = "Launcg commands", group = "apps"}),
+		{description = "Launch commands", group = "apps"}),
 
 	awful.key({modkey,			 }, "e", 
 		function ()
 			awful.util.spawn("/home/dilip/.scripts/rofi-configmenu.sh")
 		end,
-		{description = "Launcg config menu", group = "apps"}),
+		{description = "Launch config menu", group = "apps"}),
 
 	awful.key({modkey, altkey}, "q", 
 		function ()
 			awful.util.spawn("/home/dilip/.scripts/rofi-quickmarks.sh")
 		end,
-		{description = "Launcg quickmarks menu", group = "apps"}),
+		{description = "Launch quickmarks menu", group = "apps"}),
 
 	awful.key({}, "Print", 
 		function ()
 			awful.util.spawn("/home/dilip/.scripts/rofi-scrotmenu.sh")
 		end,
-		{description = "Launcg scrot menu", group = "apps"}),
+		{description = "Launch scrot menu", group = "apps"}),
 
 	awful.key({modkey, altkey}, "p",
 		function ()
@@ -228,19 +222,19 @@ globalkeys = gears.table.join(
 
 	awful.key({modkey, altkey}, "r", 
 		function ()
-			awful.util.spawn(terminal .. " -e " .. filemanager)
+			awful.util.spawn(default.terminal .. " -e " .. default.filemanager)
 		end,
-		{description = "Launcg ranger", group = "apps"}),
+		{description = "Launch ranger", group = "apps"}),
 
 	awful.key({modkey, altkey}, "n", 
 		function ()
-			awful.util.spawn(editor_cmd)
+			awful.util.spawn(default.text_editor)
 		end,
 		{description = "Launcg ranger", group = "apps"}),
 
 	awful.key({modkey, altkey}, "s", 
 		function ()
-			awful.util.spawn("sxiv -rt .")
+			awful.util.spawn(default.image_viewer .. " -rt .")
 		end,
 		{description = "Launcg ranger", group = "apps"}),
 
@@ -275,6 +269,13 @@ globalkeys = gears.table.join(
               {description = "swap with next client by index", group = "client"}),
     awful.key({ modkey, "Shift"   }, "k", function () awful.client.swap.byidx( -1)    end,
               {description = "swap with previous client by index", group = "client"}),
+
+    awful.key({ modkey, altkey}, "j", function () awful.client.incwfact(0.05)    end,
+              {description = "swap with next client by index", group = "client"}),
+
+    awful.key({ modkey, altkey}, "k", function () awful.client.incwfact(-0.05)    end,
+              {description = "swap with previous client by index", group = "client"}),
+
     -- awful.key({ modkey, "Control" }, "j", function () awful.screen.focus_relative( 1) end,
     --           {description = "focus the next screen", group = "screen"}),
     -- awful.key({ modkey, "Control" }, "k", function () awful.screen.focus_relative(-1) end,
@@ -291,7 +292,7 @@ globalkeys = gears.table.join(
         {description = "go back", group = "client"}),
 
     -- Standard program
-    awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end,
+    awful.key({ modkey,           }, "Return", function () awful.util.spawn(default.terminal) end,
               {description = "open a terminal", group = "launcher"}),
     awful.key({ modkey, "Shift" }, "r", awesome.restart,
               {description = "reload awesome", group = "awesome"}),
@@ -608,7 +609,6 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 -- AUTOSTART {{{
 
 awful.util.spawn("nm-applet")
-awful.util.spawn("xrandr -s 1360x768")
 -- awful.util.spawn("nitrogen --restore")
 awful.util.spawn("feh --bg-fill /home/dilip/.config/awesome/theme/background/wallpaper.jpg")
 awful.util.spawn("kdeconnect-indicator")
