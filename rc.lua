@@ -228,7 +228,7 @@ globalkeys = gears.table.join(
 
 	awful.key({modkey, altkey}, "n", 
 		function ()
-			awful.util.spawn(default.text_editor)
+			awful.util.spawn(default.terminal .. " -e " .. default.text_editor)
 		end,
 		{description = "Launcg ranger", group = "apps"}),
 
