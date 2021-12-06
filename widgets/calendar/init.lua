@@ -46,4 +46,4 @@ calendar.create = function(s)
 	return mytextclock
 end
 
-return calendar
+-- return calendar
