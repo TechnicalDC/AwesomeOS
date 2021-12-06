@@ -6,6 +6,7 @@ require("gears")
 local theme_assets = require("beautiful.theme_assets")
 local xresources = require("beautiful.xresources")
 local dpi = xresources.apply_dpi
+local x = xresources.get_current_theme()
 
 local gfs = require("gears.filesystem")
 local themes_path = "/home/dilip/.config/awesome/theme/"
@@ -15,7 +16,8 @@ local icon_path = themes_path .. "icons"
 local background_path = themes_path .. "background"
 
 -- COLOR
-tBg = "#282A36"
+-- tBg = "#282A36"
+tBg = x.background
 tRed = "#FF5555"
 tGreen = "#50FA7B"
 tYellow = "#F1FA8C"

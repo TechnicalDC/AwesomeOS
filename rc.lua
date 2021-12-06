@@ -170,8 +170,8 @@ end)
 --  MOUSE BINDINGS {{{
 root.buttons(gears.table.join(
     -- awful.button({ }, 3, function () mymainmenu:toggle() end),
-    awful.button({ }, 4, awful.tag.viewnext),
-    awful.button({ }, 5, awful.tag.viewprev)
+    -- awful.button({ }, 4, awful.tag.viewnext),
+    -- awful.button({ }, 5, awful.tag.viewprev)
 ))
 -- }}}
 
@@ -326,11 +326,11 @@ globalkeys = gears.table.join(
                     )
                   end
               end,
-              {description = "restore minimized", group = "client"}),
+              {description = "restore minimized", group = "client"}) --,
 
     -- Menubar
-    awful.key({ modkey }, "p", function() menubar.show() end,
-              {description = "show the menubar", group = "launcher"})
+    -- awful.key({ modkey }, "p", function() menubar.show() end,
+    --           {description = "show the menubar", group = "launcher"})
 )
 
 clientkeys = gears.table.join(
@@ -489,17 +489,21 @@ awful.rules.rules = {
       }, properties = { titlebars_enabled = true }
     },
 
+	{ rule = { class = "conky" },
+		properties = { border_width = 0, placement = nil }
+	}
+
     -- Set Firefox to always map on the tag named "2" on screen 1.
-    { rule = { class = "mpv" },
-      properties = { 
-			titlebars_enabled = false,
-			placement = awful.placement.bottom_right,
-			sticky = true,
-			ontop = true,
-			width = 445,
-			height = 250,
-			floating = true
-	  } },
+    -- { rule = { class = "mpv" },
+    --   properties = { 
+			-- titlebars_enabled = false,
+			-- placement = awful.placement.bottom_right,
+			-- sticky = true,
+			-- ontop = true,
+			-- width = 445,
+			-- height = 250,
+			-- floating = true
+	  -- } },
 }
 -- }}}
 
@@ -509,9 +513,9 @@ client.connect_signal("manage", function (c)
     -- Set the windows at the slave,
     -- i.e. put it at the end of others instead of setting it master.
     -- if not awesome.startup then awful.client.setslave(c) end
-	c.shape = function(cr, w, h)
-		gears.shape.rounded_rect(cr, w, h, 10)
-	end
+	-- c.shape = function(cr, w, h)
+	-- 	gears.shape.rounded_rect(cr, w, h, 10)
+	-- end
 
     if awesome.startup
       and not c.size_hints.user_position
@@ -614,7 +618,7 @@ awful.util.spawn("feh --bg-fill /home/dilip/.config/awesome/theme/background/wal
 awful.util.spawn("kdeconnect-indicator")
 awful.util.spawn("/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1")
 -- awful.util.spawn("volumeicon")
-awful.util.spawn("picom --experimental-backends")
--- awful.util.spawn("picom --config $HOME/.config/picom/picom-noblur.conf --experimental-backends")
+-- awful.util.spawn("picom --experimental-backends")
+awful.util.spawn("picom --config .config/picom/picom-noblur.conf --experimental-backends")
 
 -- }}}
