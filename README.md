@@ -1,6 +1,6 @@
 
 <div align="center">
-	<img src="https://github.com/TechnicalDC/AwesomeOS/blob/main/images/aos.png" alt="">
+	<img src="https://github.com/TechnicalDC/AwesomeOS/blob/main/res/aos.png" alt="">
 </div>
 
 My Awesome WM Configs
