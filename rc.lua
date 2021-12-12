@@ -122,8 +122,8 @@ screen.connect_signal("property::geometry", set_wallpaper)
 awful.screen.connect_for_each_screen(function(s)
 
     -- Each screen has its own tag table.
-    -- awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", "9" }, s, awful.layout.layouts[1])
-	addtags(s)
+    awful.tag({ "", "", "", "", "", "嗢", "", "", "" }, s, awful.layout.layouts[1])
+	-- addtags(s)
 
     s.mylayoutbox = awful.widget.layoutbox(s)
     s.mylayoutbox:buttons(gears.table.join(
@@ -137,6 +137,7 @@ awful.screen.connect_for_each_screen(function(s)
         filter  = awful.widget.taglist.filter.all,
 		layout = wibox.layout.fixed.vertical,
         buttons = taglist_buttons,
+		align = wibox.layout.align.centered
     }
 
 	-- calendar.create(s)
@@ -150,7 +151,8 @@ awful.screen.connect_for_each_screen(function(s)
 		nil,
         { -- Left widgets
 			layout = wibox.layout.fixed.vertical,
-			s.mytaglist
+			wibox.container.place(s.mytaglist,{halign = 'center'}),
+			-- s.mytaglist
         },
         { -- Right widgets
 			{

@@ -12,8 +12,8 @@ naughty.config.defaults.icon_size = dpi(32)
 naughty.config.defaults.timeout = 5
 naughty.config.defaults.title = "System Notification"
 naughty.config.defaults.margin = dpi(10)
-naughty.config.defaults.border_width = 2
-naughty.config.defaults.border_color = tBg
+naughty.config.defaults.border_width = 1
+naughty.config.defaults.border_color = tPurple
 naughty.config.defaults.position = "top_right"
 naughty.config.defaults.shape = function(cr, w, h)
 		gears.shape.rounded_rect(cr, w, h, dpi(0))

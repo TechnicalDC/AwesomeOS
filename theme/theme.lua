@@ -17,13 +17,14 @@ local background_path = themes_path .. "background"
 
 -- COLOR
 -- tBg = "#282A36"
+tFg = x.foreground
 tBg = x.background
-tRed = "#FF5555"
-tGreen = "#50FA7B"
-tYellow = "#F1FA8C"
-tPurple = "#BD93F9"
-tMagenta = "#FF79C6"
-tCyan = "#8BE9FD"
+tRed = x.color1
+tGreen = x.color2
+tYellow = x.color3
+tPurple = x.color4
+tMagenta = x.color5
+tCyan = x.color6
 
 theme.font          = "Roboto 8"
 theme.wallpaper     = themes_path.. "background/wallpaper.jpg"
@@ -35,16 +36,16 @@ theme.bg_focus      = tPurple
 theme.bg_urgent     = tRed
 theme.bg_systray    = theme.bg_normal
 
-theme.fg_normal     = "#F8F8F2"
-theme.fg_focus      = "#F8F8F2"
-theme.fg_urgent     = "#F8F8F2"
-theme.fg_minimize   = "#F8F8F2"
+theme.fg_normal     = tFg
+theme.fg_focus      = tFg
+theme.fg_urgent     = tFg
+theme.fg_minimize   = tFg
 
 theme.useless_gap   = dpi(8)
-theme.border_width  = dpi(2)
+theme.border_width  = dpi(1)
 theme.border_normal = tMagenta
 theme.border_focus  = tPurple
-theme.border_marked = "#91231c"
+theme.border_marked = tGreen
 
 -- CALENDAR
 theme.calendar_font = theme.font
@@ -54,17 +55,20 @@ theme.calendar_long_weekdays = true
 -- TITLEBAR
 theme.titlebar_bg_normal = tBg
 theme.titlebar_bg_focus = tBg
-theme.titlebar_fg_focus = "#F8F8F2"
-theme.titlebar_fg_normal = "#F8F8F2"
+theme.titlebar_fg_focus = tFg
+theme.titlebar_fg_normal = tFg
 
 -- TAGLIST
-theme.taglist_bg_focus = "#6C6E7A" 
-theme.taglist_fg_focus = theme.fg_focus
+theme.taglist_bg_focus = tBg 
+theme.taglist_fg_focus = tPurple 
 theme.taglist_bg_urgent = theme.bg_urgent
 theme.taglist_fg_urgent = theme.fg_urgent
-theme.taglist_bg_occupied = "#4A4C58" 
-theme.taglist_fg_occupied = theme.fg_normal
+theme.taglist_bg_occupied = tBg 
+theme.taglist_fg_occupied = tGreen 
+theme.taglist_bg_empty = tBg
+theme.taglist_fg_empty = tCyan
 theme.taglist_spacing = 0
+theme.taglist_font = "SauceCode Pro Nerd Font Mono 15"
 theme.taglist_disable_icon = false
 
 -- There are other variable sets
@@ -94,7 +98,7 @@ theme.notification_margin = dpi(20)
 -- Variables set for theming the menu:
 -- menu_[bg|fg]_[normal|focus]
 -- menu_[border_color|border_width]
-theme.menu_submenu_icon = themes_path.."default/submenu.png"
+theme.menu_submenu_icon = themes_path .."default/submenu.png"
 theme.menu_height = dpi(20)
 theme.menu_width  = dpi(150)
 

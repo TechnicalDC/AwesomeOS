@@ -9,7 +9,7 @@ local naughty = require("naughty")
 local icon_path = "/home/dilip/.config/awesome/theme/icons/taglist/"
 
 addtags = function(s)
-	tag_names = { "1","2","3","4","5","6","7","8","9",}
+	tag_names = { "", "", "", "", "", "嗢", "", "", "" }
 
 	tag_icons = {
 		icon_path .. "web.png",		-- 1 --
