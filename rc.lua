@@ -122,7 +122,7 @@ screen.connect_signal("property::geometry", set_wallpaper)
 awful.screen.connect_for_each_screen(function(s)
 
     -- Each screen has its own tag table.
-    awful.tag({ "", "", "", "", "", "嗢", "", "", "" }, s, awful.layout.layouts[1])
+    awful.tag({ "", "", "", "", "", "嗢", "", "", "" }, s, awful.layout.layouts[1])
 	-- addtags(s)
 
     s.mylayoutbox = awful.widget.layoutbox(s)
