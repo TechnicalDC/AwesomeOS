@@ -26,8 +26,8 @@ awful.util.spawn("nm-applet")
 awful.util.spawn("kdeconnect-indicator")
 awful.util.spawn("/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1")
 -- awful.util.spawn("volumeicon")
--- awful.util.spawn("picom --experimental-backends")
-awful.util.spawn("picom --config .config/picom/picom-noblur.conf --experimental-backends")
+awful.util.spawn("picom --experimental-backends")
+-- awful.util.spawn("picom --config .config/picom/picom-noblur.conf --experimental-backends")
 
 -- }}}
 
