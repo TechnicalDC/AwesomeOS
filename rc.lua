@@ -16,6 +16,21 @@ local debian = require("debian.menu")							-- Load Debian menu entries
 local has_fdo, freedesktop = pcall(require, "freedesktop")
 -- }}}
 
+-- AUTOSTART {{{
+
+awful.util.spawn("./.fehbg")
+awful.util.spawn("wal -R")
+awful.util.spawn("nm-applet")
+-- awful.util.spawn("nitrogen --restore")
+-- awful.util.spawn("feh --bg-fill /home/dilip/.config/awesome/theme/background/wallpaper.jpg")
+awful.util.spawn("kdeconnect-indicator")
+awful.util.spawn("/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1")
+-- awful.util.spawn("volumeicon")
+-- awful.util.spawn("picom --experimental-backends")
+awful.util.spawn("picom --config .config/picom/picom-noblur.conf --experimental-backends")
+
+-- }}}
+
 -- MY {{{
 require('defaults')
 require('modules.tags')
@@ -110,7 +125,7 @@ local function set_wallpaper(s)
         local wallpaper = beautiful.wallpaper
         -- If wallpaper is a function, call it with the screen
         if type(wallpaper) == "function" then
-            wallpaper = wallpaper(s)
+            -- wallpaper = wallpaper(s)
         end
         gears.wallpaper.maximized(wallpaper, s, true)
     end
@@ -236,7 +251,7 @@ globalkeys = gears.table.join(
 
 	awful.key({modkey, altkey}, "s", 
 		function ()
-			awful.util.spawn(default.image_viewer .. " -rt .")
+			awful.util.spawn(default.image_viewer .. " -t Wallpapers")
 		end,
 		{description = "Launcg ranger", group = "apps"}),
 
@@ -488,7 +503,7 @@ awful.rules.rules = {
 
     -- Add titlebars to normal clients and dialogs
     { rule_any = {type = { "normal", "dialog" }
-      }, properties = { titlebars_enabled = true }
+      }, properties = { titlebars_enabled = false } -- TEST
     },
 
 	{ rule = { class = "conky" },
@@ -612,15 +627,3 @@ client.connect_signal("focus", function(c) c.border_color = beautiful.border_foc
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
 
--- AUTOSTART {{{
-
-awful.util.spawn("nm-applet")
--- awful.util.spawn("nitrogen --restore")
-awful.util.spawn("feh --bg-fill /home/dilip/.config/awesome/theme/background/wallpaper.jpg")
-awful.util.spawn("kdeconnect-indicator")
-awful.util.spawn("/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1")
--- awful.util.spawn("volumeicon")
--- awful.util.spawn("picom --experimental-backends")
-awful.util.spawn("picom --config .config/picom/picom-noblur.conf --experimental-backends")
-
--- }}}

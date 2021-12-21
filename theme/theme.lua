@@ -2,6 +2,7 @@
 -- Default awesome theme --
 ---------------------------
 require("gears")
+local gears = require("gears")
 
 local theme_assets = require("beautiful.theme_assets")
 local xresources = require("beautiful.xresources")
@@ -42,10 +43,15 @@ theme.fg_urgent     = tFg
 theme.fg_minimize   = tFg
 
 theme.useless_gap   = dpi(8)
-theme.border_width  = dpi(1)
-theme.border_normal = tMagenta
+theme.border_width  = dpi(2)
+theme.border_normal = tYellow
 theme.border_focus  = tPurple
 theme.border_marked = tGreen
+theme.snap_bg = tPurple
+theme.snap_border_width = dpi(2)
+theme.snap_shape = function(cr, w, h)
+    gears.shape.rounded_rect(cr, w, h, dpi(0))
+end
 
 -- CALENDAR
 theme.calendar_font = theme.font
@@ -61,8 +67,8 @@ theme.titlebar_fg_normal = tFg
 -- TAGLIST
 theme.taglist_bg_focus = tBg 
 theme.taglist_fg_focus = tPurple 
-theme.taglist_bg_urgent = theme.bg_urgent
-theme.taglist_fg_urgent = theme.fg_urgent
+theme.taglist_bg_urgent = tBg
+theme.taglist_fg_urgent = tRed
 theme.taglist_bg_occupied = tBg 
 theme.taglist_fg_occupied = tGreen 
 theme.taglist_bg_empty = tBg

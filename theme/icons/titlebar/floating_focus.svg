@@ -13,7 +13,10 @@
    version="1.1"
    id="svg8"
    sodipodi:docname="floating_focus.svg"
-   inkscape:version="1.0.2 (e86c870879, 2021-01-15)">
+   inkscape:version="1.0.2 (e86c870879, 2021-01-15)"
+   inkscape:export-filename="/home/dilip/.config/awesome/theme/icons/titlebar/floating_focus.png"
+   inkscape:export-xdpi="48"
+   inkscape:export-ydpi="48">
   <defs
      id="defs2" />
   <sodipodi:namedview
@@ -31,10 +34,10 @@
      inkscape:document-rotation="0"
      showgrid="false"
      units="px"
-     inkscape:window-width="1307"
-     inkscape:window-height="709"
-     inkscape:window-x="16"
-     inkscape:window-y="39"
+     inkscape:window-width="1267"
+     inkscape:window-height="732"
+     inkscape:window-x="44"
+     inkscape:window-y="16"
      inkscape:window-maximized="0" />
   <metadata
      id="metadata5">
@@ -44,7 +47,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -53,12 +56,14 @@
      inkscape:groupmode="layer"
      id="layer1">
     <rect
-       style="opacity:1;fill:#f1fa8c;fill-opacity:1;stroke:#f1fa8c;stroke-width:0.493906;stroke-linejoin:round;stroke-opacity:1"
+       style="opacity:1;fill:	#4B9CC7;fill-opacity:1;stroke:	#4B9CC7;stroke-width:0.493906;stroke-linejoin:round;stroke-opacity:1"
        id="rect833"
        width="52.42276"
        height="52.42276"
        x="7.6552868"
        y="7.6552868"
-       ry="26.21138" />
+       ry="26.21138"
+       inkscape:export-xdpi="48"
+       inkscape:export-ydpi="48" />
   </g>
 </svg>
