@@ -8,5 +8,5 @@ My Awesome WM Configs
 > In progress...
 
 ## Screenshot
-![cast](https://github.com/TechnicalDC/AwesomeOS/blob/main/res/animated.gif)
+![cast](https://github.com/TechnicalDC/AwesomeOS/blob/main/res/awesome.gif)
 
