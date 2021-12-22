@@ -227,7 +227,7 @@ globalkeys = gears.table.join(
 
 	awful.key({}, "Print", 
 		function ()
-			awful.util.spawn("/home/dilip/.scripts/rofi-scrotmenu.sh")
+			awful.util.spawn("/home/dilip/.config/awesome/scripts/rofi-scrotmenu.sh")
 		end,
 		{description = "Launch scrot menu", group = "apps"}),
 
