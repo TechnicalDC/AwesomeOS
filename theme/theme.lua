@@ -59,8 +59,8 @@ theme.calendar_start_sunday = true
 theme.calendar_long_weekdays = true
 
 -- TITLEBAR
-theme.titlebar_bg_normal = tBg
-theme.titlebar_bg_focus = tBg
+theme.titlebar_bg_normal = tYellow
+theme.titlebar_bg_focus = tPurple
 theme.titlebar_fg_focus = tFg
 theme.titlebar_fg_normal = tFg
 

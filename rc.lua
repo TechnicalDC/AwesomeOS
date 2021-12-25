@@ -504,7 +504,7 @@ awful.rules.rules = {
 
     -- Add titlebars to normal clients and dialogs
     { rule_any = {type = { "normal", "dialog" }
-      }, properties = { titlebars_enabled = false } -- TEST
+      }, properties = { titlebars_enabled = true } -- TEST
     },
 
 	{ rule = { class = "conky" },
@@ -587,19 +587,20 @@ client.connect_signal("request::titlebars", function(c)
 			layout = wibox.layout.fixed.vertical
 		}
 	else
-		awful.titlebar(c, {position = 'left', size = dpi(35)}) : setup {
-			{ -- Right
-				{
-					awful.titlebar.widget.closebutton    (c),
-					awful.titlebar.widget.maximizedbutton(c),
-					awful.titlebar.widget.floatingbutton (c),
-					-- awful.titlebar.widget.stickybutton   (c),
-					spacing = dpi(3),
-					layout = wibox.layout.fixed.vertical
-				},
-				margins = 8,
-				widget = wibox.container.margin
-			},
+		awful.titlebar(c, {position = 'left', size = dpi(25)}) : setup {
+			nil,
+			-- { -- Right
+			-- 	{
+			-- 		awful.titlebar.widget.closebutton    (c),
+			-- 		awful.titlebar.widget.maximizedbutton(c),
+			-- 		awful.titlebar.widget.floatingbutton (c),
+			-- 		-- awful.titlebar.widget.stickybutton   (c),
+			-- 		spacing = dpi(3),
+			-- 		layout = wibox.layout.fixed.vertical
+			-- 	},
+			-- 	margins = 8,
+			-- 	widget = wibox.container.margin
+			-- },
 			{
 				buttons = buttons,
 				layout = wibox.layout.align.vertical

@@ -13,7 +13,7 @@
 }
 
 #window {
-	border:           2;
+	border:           2 2 2 30 ;
 	border-color:     @selected-urgent-background;
 
 }
@@ -28,7 +28,7 @@
     fixed-height: 0;
     spacing:      0px ;
     scrollbar:    false;
-    padding:      10px 0px 0px 0px;
+    padding:      20px 0px;
 }
 
 #element {
