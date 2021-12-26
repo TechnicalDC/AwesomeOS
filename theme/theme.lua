@@ -27,6 +27,7 @@ tPurple = x.color4
 tMagenta = x.color5
 tCyan = x.color6
 
+theme.icon_font = "SauceCode Pro Nerd Font Mono 15"
 theme.font          = "Roboto 8"
 theme.wallpaper     = themes_path.. "background/wallpaper.jpg"
 

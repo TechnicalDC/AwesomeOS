@@ -27,7 +27,7 @@ case $choice in
 		delayoption2="Take screenshot with 5 sec delay"
 		delayoption3="Take screenshot with 10 sec delay"
 		delayoptions="$delayoption1\n$delayoption2\n$delayoption3"
-		delay=$(echo -e "$delayoptions" | rofi -i -dmenu -no-show-icons -no-sidebar-mode -lines 3 -width 25 -p " ") 
+		delay=$(echo -e "$delayoptions" | rofi -i -dmenu -no-show-icons -no-sidebar-mode -lines 3 -width 25 -p " " -location 0 -theme ~/.config/awesome/theme/rofi/wal-dialog.rasi) 
 
 		case $delay in
 

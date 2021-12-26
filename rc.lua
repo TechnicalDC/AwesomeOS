@@ -26,16 +26,17 @@ awful.util.spawn("nm-applet")
 awful.util.spawn("kdeconnect-indicator")
 awful.util.spawn("/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1")
 -- awful.util.spawn("volumeicon")
+-- awful.util.spawn("conky")
 -- awful.util.spawn("picom --experimental-backends")
 awful.util.spawn("picom --config .config/picom/picom-noblur.conf --experimental-backends")
 
 -- }}}
 
--- MY {{{
+-- MINE {{{
 require('defaults')
 require('modules.tags')
-require('widgets.calendar')
--- require('modules.right-click-menu')
+require('modules.logout-menu')
+require('modules.logout-popup')
 require('modules.notification')
 -- }}}
 
@@ -172,6 +173,7 @@ awful.screen.connect_for_each_screen(function(s)
         { -- Right widgets
 			{
 				layout = wibox.layout.fixed.vertical,
+				wibox.container.place(logout_menu_widget,{halign = 'center'}),
 				wibox.container.place(mytextclock,{halign = 'center'}),
 				wibox.container.place(mysystray,{halign = 'center'}),
 				s.mylayoutbox,
@@ -344,11 +346,12 @@ globalkeys = gears.table.join(
                     )
                   end
               end,
-              {description = "restore minimized", group = "client"}) --,
+              {description = "restore minimized", group = "client"}) ,
 
-    -- Menubar
-    -- awful.key({ modkey }, "p", function() menubar.show() end,
-    --           {description = "show the menubar", group = "launcher"})
+	-- WIDGETS KEYBINDINGS -- DEMO TEST
+	awful.key({modkey, }, "0",
+				function () popup_toggle() end,
+				{description = "Toggle", group = "Widgets"})
 )
 
 clientkeys = gears.table.join(
@@ -504,7 +507,7 @@ awful.rules.rules = {
 
     -- Add titlebars to normal clients and dialogs
     { rule_any = {type = { "normal", "dialog" }
-      }, properties = { titlebars_enabled = true } -- TEST
+      }, properties = { titlebars_enabled = false } 
     },
 
 	{ rule = { class = "conky" },
@@ -560,16 +563,17 @@ client.connect_signal("request::titlebars", function(c)
     )
 
 	if c.type == "dialog" then
-		awful.titlebar(c, {position = 'left', size = dpi(35)}) : setup {
-			{ -- Right
-				{
-					awful.titlebar.widget.closebutton    (c),
-					spacing = dpi(3),
-					layout = wibox.layout.fixed.vertical
-				},
-				margins = 8,
-				widget = wibox.container.margin
-			},
+		awful.titlebar(c, {position = 'left', size = dpi(25)}) : setup {
+			nil,
+			-- { -- Right
+			-- 	{
+			-- 		awful.titlebar.widget.closebutton    (c),
+			-- 		spacing = dpi(3),
+			-- 		layout = wibox.layout.fixed.vertical
+			-- 	},
+			-- 	margins = 8,
+			-- 	widget = wibox.container.margin
+			-- },
 			{
 				buttons = buttons,
 				layout = wibox.layout.align.vertical
