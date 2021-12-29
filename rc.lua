@@ -89,9 +89,9 @@ awful.layout.layouts = {
 --  WIBAR {{{
 -- Create a textclock widget
 mytextclock = wibox.widget.textclock("<span size='large'>%H\n%M</span>")
--- mytextclock.connect_signal("button::press", function(button)
+-- mytextclock.connect_signal("button::press", function()
 -- 	if button == 1 then
--- 		awful.util.spawn("notify-send 'asdf' 'sfds'")
+-- 				popup_toggle()
 -- 	end
 -- end)
 
@@ -188,7 +188,7 @@ end)
 
 --  MOUSE BINDINGS {{{
 root.buttons(gears.table.join(
-    -- awful.button({ }, 3, function () mymainmenu:toggle() end),
+    awful.button({ }, 3, function () popup_toggle() end)
     -- awful.button({ }, 4, awful.tag.viewnext),
     -- awful.button({ }, 5, awful.tag.viewprev)
 ))
@@ -270,24 +270,46 @@ globalkeys = gears.table.join(
 
     awful.key({ modkey,           }, "j",
         function ()
-            awful.client.focus.byidx( 1)
+            awful.client.focus.bydirection("down")
         end,
-        {description = "focus next by index", group = "client"}
+        {description = "focus down", group = "client"}
     ),
     awful.key({ modkey,           }, "k",
         function ()
-            awful.client.focus.byidx(-1)
+            awful.client.focus.bydirection("up")
         end,
-        {description = "focus previous by index", group = "client"}
+        {description = "focus up", group = "client"}
     ),
-    -- awful.key({ modkey,           }, "w", function () mymainmenu:show() end,
-    --           {description = "show main menu", group = "awesome"}),
+	awful.key({ modkey,			 }, "h",
+		function ()
+			awful.client.focus.bydirection("left")
+		end,
+		{description = "focus left", group = "client"}),
+	awful.key({ modkey,			 }, "l",
+		function ()
+			awful.client.focus.bydirection("right")
+		end,
+		{description = "focus left", group = "client"}),
+	awful.key({modkey,			}, "c",
+		function ()
+			awful.client.focus.byidx(1)
+		end,
+		{description = "focus next by index", group = "client"}),
+	awful.key({modkey,"Shift"}, "c",
+		function ()
+			awful.client.focus.byidx(-1)
+		end,
+		{description = "focus previous by index", group = "client"}),
 
     -- Layout manipulation
-    awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end,
-              {description = "swap with next client by index", group = "client"}),
-    awful.key({ modkey, "Shift"   }, "k", function () awful.client.swap.byidx( -1)    end,
-              {description = "swap with previous client by index", group = "client"}),
+    awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.bydirection("down")    end,
+              {description = "swap with below window", group = "client"}),
+    awful.key({ modkey, "Shift"   }, "k", function () awful.client.swap.bydirection("up")    end,
+              {description = "swap with above client", group = "client"}),
+    awful.key({ modkey, "Shift"   }, "h", function () awful.client.swap.bydirection("left")    end,
+              {description = "swap with left window", group = "client"}),
+    awful.key({ modkey, "Shift"   }, "l", function () awful.client.swap.bydirection("right")    end,
+              {description = "swap with right client", group = "client"}),
 
 	-- RESIZING WINDOWS
     awful.key({ modkey, altkey}, "j", function () awful.client.incwfact(0.05)    end,
@@ -493,7 +515,7 @@ awful.rules.rules = {
         -- Note that the name property shown in xprop might be set slightly after creation of the client
         -- and the name shown there might not match defined rules here.
         name = {
-          "Event Tester",  
+          "Event Tester",
         },
         role = {
           "AlarmWindow",  
