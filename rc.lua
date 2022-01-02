@@ -188,7 +188,7 @@ end)
 
 --  MOUSE BINDINGS {{{
 root.buttons(gears.table.join(
-    awful.button({ }, 3, function () popup_toggle() end)
+    awful.button({ }, 3, function () dashboard_toggle() end)
     -- awful.button({ }, 4, awful.tag.viewnext),
     -- awful.button({ }, 5, awful.tag.viewprev)
 ))
@@ -372,7 +372,7 @@ globalkeys = gears.table.join(
 
 	-- WIDGETS KEYBINDINGS -- DEMO TEST
 	awful.key({modkey, }, "0",
-				function () popup_toggle() end,
+				function () dashboard_toggle() end,
 				{description = "Toggle", group = "Widgets"})
 )
 
