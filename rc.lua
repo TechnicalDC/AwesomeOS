@@ -28,7 +28,7 @@ awful.util.spawn("/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
 -- awful.util.spawn("volumeicon")
 -- awful.util.spawn("conky")
 -- awful.util.spawn("picom --experimental-backends")
-awful.util.spawn("picom --config .config/picom/picom-noblur.conf --experimental-backends")
+awful.util.spawn("picom --experimental-backends")
 
 -- }}}
 
@@ -36,7 +36,7 @@ awful.util.spawn("picom --config .config/picom/picom-noblur.conf --experimental-
 require('defaults')
 require('modules.tags')
 require('modules.logout-menu')
-require('modules.logout-popup')
+require('modules.dashboard')
 require('modules.notification')
 -- }}}
 
@@ -233,11 +233,11 @@ globalkeys = gears.table.join(
 		end,
 		{description = "Launch scrot menu", group = "apps"}),
 
-	awful.key({modkey, altkey}, "p",
-		function ()
-			awful.util.spawn("/home/dilip/.scripts/poly-picom.sh")
-		end,
-		{description = "Toggle picom", group = "apps"}),
+	-- awful.key({modkey, altkey}, "p",
+	-- 	function ()
+	-- 		awful.util.spawn("/home/dilip/.scripts/poly-picom.sh")
+	-- 	end,
+	-- 	{description = "Toggle picom", group = "apps"}),
 
 	awful.key({modkey, altkey}, "r", 
 		function ()
@@ -249,13 +249,42 @@ globalkeys = gears.table.join(
 		function ()
 			awful.util.spawn(default.terminal .. " -e " .. default.text_editor)
 		end,
-		{description = "Launcg ranger", group = "apps"}),
+		{description = "Launch ranger", group = "apps"}),
 
 	awful.key({modkey, altkey}, "s", 
 		function ()
 			awful.util.spawn(default.image_viewer .. " -t Wallpapers")
 		end,
-		{description = "Launcg ranger", group = "apps"}),
+		{description = "Launch ranger", group = "apps"}),
+
+	-- MPD / MPC
+	awful.key({modkey, altkey}, "p",
+		function ()
+			awful.util.spawn(default.player .. " toggle")
+			naughty.notify({
+				text="Song state change",
+				title="Mpc"
+			})
+		end,
+		{description = "Toggle song", group = "apps"}),
+	awful.key({modkey, altkey}, "]",
+		function ()
+			awful.util.spawn(default.player .. " next")
+			naughty.notify({
+				text="Playing " .. awful.util.spawn(default.player .. " current"),
+				title="Mpc"
+			})
+		end,
+		{description = "Play next song", group = "apps"}),
+	awful.key({modkey, altkey}, "[",
+		function ()
+			awful.util.spawn(default.player .. " previous")
+			naughty.notify({
+				text="Playing " .. awful.util.spawn(default.player .. " current"),
+				title="Mpc"
+			})
+		end,
+		{description = "Play previous song", group = "apps"}),
 
 
 	-- Other Keys

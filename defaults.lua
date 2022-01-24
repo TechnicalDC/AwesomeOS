@@ -10,6 +10,7 @@ default.web_browser = "qutebrowser"
 default.image_viewer = "sxiv"
 default.systerm_monitor = "htop"
 default.pdf_viewer = "zathura"
+default.player = "mpc"
 
 
 
