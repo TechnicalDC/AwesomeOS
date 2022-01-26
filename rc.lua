@@ -233,12 +233,6 @@ globalkeys = gears.table.join(
 		end,
 		{description = "Launch scrot menu", group = "apps"}),
 
-	-- awful.key({modkey, altkey}, "p",
-	-- 	function ()
-	-- 		awful.util.spawn("/home/dilip/.scripts/poly-picom.sh")
-	-- 	end,
-	-- 	{description = "Toggle picom", group = "apps"}),
-
 	awful.key({modkey, altkey}, "r", 
 		function ()
 			awful.util.spawn(default.terminal .. " -e " .. default.filemanager)
@@ -260,29 +254,17 @@ globalkeys = gears.table.join(
 	-- MPD / MPC
 	awful.key({modkey, altkey}, "p",
 		function ()
-			awful.util.spawn(default.player .. " toggle")
-			naughty.notify({
-				text="Song state change",
-				title="Mpc"
-			})
+			awful.util.spawn("player toggle")
 		end,
 		{description = "Toggle song", group = "apps"}),
 	awful.key({modkey, altkey}, "]",
 		function ()
-			awful.util.spawn(default.player .. " next")
-			naughty.notify({
-				text="Playing " .. awful.util.spawn(default.player .. " current"),
-				title="Mpc"
-			})
+			awful.util.spawn("player next")
 		end,
 		{description = "Play next song", group = "apps"}),
 	awful.key({modkey, altkey}, "[",
 		function ()
-			awful.util.spawn(default.player .. " previous")
-			naughty.notify({
-				text="Playing " .. awful.util.spawn(default.player .. " current"),
-				title="Mpc"
-			})
+			awful.util.spawn("player prev")
 		end,
 		{description = "Play previous song", group = "apps"}),
 
