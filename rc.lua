@@ -223,7 +223,7 @@ globalkeys = gears.table.join(
 
 	awful.key({modkey, altkey}, "q", 
 		function ()
-			awful.util.spawn("/home/dilip/.scripts/rofi-quickmarks.sh")
+			awful.util.spawn("/home/dilip/.scripts/rofi-bookmarks.sh")
 		end,
 		{description = "Launch quickmarks menu", group = "apps"}),
 
