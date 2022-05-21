@@ -20,14 +20,13 @@ local has_fdo, freedesktop = pcall(require, "freedesktop")
 
 awful.util.spawn("./.fehbg")
 awful.util.spawn("wal -R")
+awful.util.spawn("conky -c ~/.config/conky/conky-day")
+awful.util.spawn("mpv --no-video ~/Downloads/SoundEffects/Computer_Magic-Microsift-1901299923.mp3")
 awful.util.spawn("nm-applet")
 -- awful.util.spawn("nitrogen --restore")
--- awful.util.spawn("feh --bg-fill /home/dilip/.config/awesome/theme/background/wallpaper.jpg")
 awful.util.spawn("kdeconnect-indicator")
 awful.util.spawn("/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1")
 -- awful.util.spawn("volumeicon")
--- awful.util.spawn("conky")
--- awful.util.spawn("picom --experimental-backends")
 awful.util.spawn("picom --experimental-backends")
 
 -- }}}
@@ -35,9 +34,9 @@ awful.util.spawn("picom --experimental-backends")
 -- MINE {{{
 require('defaults')
 require('modules.tags')
-require('modules.logout-menu')
 require('modules.dashboard')
 require('modules.notification')
+local logout_popup = require('modules.logout-popup')
 -- }}}
 
 --  ERROR HANDLING {{{
@@ -80,9 +79,6 @@ awful.layout.layouts = {
     awful.layout.suit.tile,
     awful.layout.suit.max,
     awful.layout.suit.floating,
-    awful.layout.suit.tile.left,
-    awful.layout.suit.tile.bottom,
-    awful.layout.suit.tile.top,
 }
 -- }}}
 
@@ -173,7 +169,6 @@ awful.screen.connect_for_each_screen(function(s)
         { -- Right widgets
 			{
 				layout = wibox.layout.fixed.vertical,
-				wibox.container.place(logout_menu_widget,{halign = 'center'}),
 				wibox.container.place(mytextclock,{halign = 'center'}),
 				wibox.container.place(mysystray,{halign = 'center'}),
 				s.mylayoutbox,
@@ -188,7 +183,7 @@ end)
 
 --  MOUSE BINDINGS {{{
 root.buttons(gears.table.join(
-    awful.button({ }, 3, function () dashboard_toggle() end)
+    awful.button({ }, 3, function () logout_popup.launch() end)
     -- awful.button({ }, 4, awful.tag.viewnext),
     -- awful.button({ }, 5, awful.tag.viewprev)
 ))
@@ -201,7 +196,7 @@ globalkeys = gears.table.join(
 		function ()
 			awful.util.spawn("rofi -show drun")
 		end,
-		{description = "Launcg rofi", group = "apps"}),
+		{description = "Launch rofi", group = "apps"}),
 
 	awful.key({modkey,			 }, "w", 
 		function ()
@@ -247,27 +242,48 @@ globalkeys = gears.table.join(
 
 	awful.key({modkey, altkey}, "s", 
 		function ()
-			awful.util.spawn(default.image_viewer .. " -t Wallpapers")
+			awful.util.spawn(default.image_viewer .. " -rt Wallpapers")
 		end,
 		{description = "Launch ranger", group = "apps"}),
+	awful.key({modkey, altkey}, "m",
+		function ()
+			awful.util.spawn(default.terminal .. " -e " .. default.email_client)
+		end,
+		{description = "Launch neomutt", group = "apps"}),
+	awful.key({modkey, altkey}, "t",
+		function ()
+			awful.util.spawn(default.terminal .. " -e " .. default.tg_client)
+		end,
+		{description = "Launch tg client", group = "apps"}),
 
 	-- MPD / MPC
 	awful.key({modkey, altkey}, "p",
 		function ()
-			awful.util.spawn("player toggle")
+			awful.util.spawn("bash .scripts/player toggle")
 		end,
 		{description = "Toggle song", group = "apps"}),
 	awful.key({modkey, altkey}, "]",
 		function ()
-			awful.util.spawn("player next")
+			awful.util.spawn("bash .scripts/player next")
 		end,
 		{description = "Play next song", group = "apps"}),
 	awful.key({modkey, altkey}, "[",
 		function ()
-			awful.util.spawn("player prev")
+			awful.util.spawn("bash .scripts/player prev")
 		end,
 		{description = "Play previous song", group = "apps"}),
-
+	
+	-- Brightness
+	awful.key({modkey}, "Next",
+		function ()
+			awful.util.spawn("bash .scripts/lightctl dec 0.1")
+		end,
+		{description = "Decrease brightness", group = "system"}),
+	awful.key({modkey}, "Prior",
+		function ()
+			awful.util.spawn("bash .scripts/lightctl inc 0.1")
+		end,
+		{description = "Increase brightness", group = "system"}),
 
 	-- Other Keys
     awful.key({ modkey,           }, "F1",      hotkeys_popup.show_help,
@@ -353,7 +369,11 @@ globalkeys = gears.table.join(
               {description = "open a terminal", group = "launcher"}),
     awful.key({ modkey, "Shift" }, "r", awesome.restart,
               {description = "reload awesome", group = "awesome"}),
-    awful.key({ modkey, "Shift"   }, "q", awesome.quit,
+    awful.key({ modkey, "Shift"   }, "q", 
+			function ()
+				-- awesome.quit
+				logout_popup.launch()
+			end,
               {description = "quit awesome", group = "awesome"}),
 
     awful.key({ modkey, "Shift"   }, "h",     function () awful.tag.incnmaster( 1, nil, true) end,
@@ -379,12 +399,8 @@ globalkeys = gears.table.join(
                     )
                   end
               end,
-              {description = "restore minimized", group = "client"}) ,
+              {description = "restore minimized", group = "client"}) 
 
-	-- WIDGETS KEYBINDINGS -- DEMO TEST
-	awful.key({modkey, }, "0",
-				function () dashboard_toggle() end,
-				{description = "Toggle", group = "Widgets"})
 )
 
 clientkeys = gears.table.join(
@@ -394,6 +410,13 @@ clientkeys = gears.table.join(
             c:raise()
         end,
         {description = "toggle fullscreen", group = "client"}),
+	-- awful.key({modkey, "Shift"}, "h",
+	-- 	function (c)
+	-- 		if c.floating then
+	-- 			c.relative_move({x = -100})
+	-- 		end
+	-- 	end,
+	-- 	{description = "", group = ""}),	
 
     awful.key({ modkey, }, "q",      function (c) c:kill() end,
               {description = "Quit window", group = "client"}),
@@ -500,7 +523,7 @@ awful.rules.rules = {
                      buttons = clientbuttons,
                      screen = awful.screen.preferred,
 					 size_hints_honor = false,
-					 placement = awful.placement.centered + awful.placement.no_offscreen
+					 placement = awful.placement.centered+awful.placement.no_offscreen
      }
     },
 
@@ -510,6 +533,7 @@ awful.rules.rules = {
           "DTA",  -- Firefox addon DownThemAll.
           "copyq",  -- Includes session name in class.
           "pinentry",
+		  "filechooser"
         },
         class = {
           "Arandr",
@@ -535,8 +559,10 @@ awful.rules.rules = {
         }
       }, properties = { 
 			floating = true,
-			placement = awful.placement.centered + awful.placement.no_offscreen
 		}},
+
+	{ rule_any = { class = {"SimpleScreenRecorder"}},
+		properties = {tag = "9", switchtotag = true}},
 
     -- Add titlebars to normal clients and dialogs
     { rule_any = {type = { "normal", "dialog" }
