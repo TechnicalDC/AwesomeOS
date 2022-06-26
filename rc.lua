@@ -21,7 +21,7 @@ local has_fdo, freedesktop = pcall(require, "freedesktop")
 awful.util.spawn("./.fehbg")
 awful.util.spawn("wal -R")
 awful.util.spawn("conky -c ~/.config/conky/conky-day")
-awful.util.spawn("mpv --no-video ~/Downloads/SoundEffects/Computer_Magic-Microsift-1901299923.mp3")
+awful.util.spawn("mpv --no-video ~/audio/SoundEffects/Computer_Magic-Microsift-1901299923.mp3")
 awful.util.spawn("nm-applet")
 -- awful.util.spawn("nitrogen --restore")
 awful.util.spawn("kdeconnect-indicator")
@@ -84,16 +84,11 @@ awful.layout.layouts = {
 
 --  WIBAR {{{
 -- Create a textclock widget
-mytextclock = wibox.widget.textclock("<span size='large'>%H\n%M</span>")
--- mytextclock.connect_signal("button::press", function()
--- 	if button == 1 then
--- 				popup_toggle()
--- 	end
--- end)
+mytextclock = wibox.widget.textclock("<span size='large'>%d %b, %a %H:%M</span>")
 
 -- Create a systray and make it vertical
 mysystray = wibox.widget.systray()
-mysystray.set_horizontal(false)
+mysystray.set_horizontal(true)
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
@@ -147,7 +142,7 @@ awful.screen.connect_for_each_screen(function(s)
     s.mytaglist = awful.widget.taglist {
         screen  = s,
         filter  = awful.widget.taglist.filter.all,
-		layout = wibox.layout.fixed.vertical,
+		layout = wibox.layout.fixed.horizontal,
         buttons = taglist_buttons,
 		align = wibox.layout.align.centered
     }
@@ -155,20 +150,25 @@ awful.screen.connect_for_each_screen(function(s)
 	-- calendar.create(s)
 
     -- Create the wibox
-    s.mywibox = awful.wibar({ position = "left", screen = s })
+    s.mywibox = awful.wibar({position = "top", 
+							 screen = s,
+							 widht = 500,
+							 height = 25,
+							 x = 10,
+							 y = 10})
 
     -- Add widgets to the wibox
     s.mywibox:setup {
-        layout = wibox.layout.align.vertical,
+        layout = wibox.layout.align.horizontal,
 		nil,
         { -- Left widgets
-			layout = wibox.layout.fixed.vertical,
+			layout = wibox.layout.fixed.horizontal,
 			wibox.container.place(s.mytaglist,{halign = 'center'}),
 			-- s.mytaglist
         },
         { -- Right widgets
 			{
-				layout = wibox.layout.fixed.vertical,
+				layout = wibox.layout.fixed.horizontal,
 				wibox.container.place(mytextclock,{halign = 'center'}),
 				wibox.container.place(mysystray,{halign = 'center'}),
 				s.mylayoutbox,

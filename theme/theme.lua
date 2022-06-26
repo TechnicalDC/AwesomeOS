@@ -29,7 +29,7 @@ tCyan = x.color6
 
 theme.icon_font = "SauceCode Pro Nerd Font Mono 15"
 theme.font          = "Roboto 8"
-theme.wallpaper     = themes_path.. "background/wallpaper.jpg"
+theme.wallpaper     = themes_path .. "background/wallpaper.jpg"
 
 theme.wibar_width = 28
 
@@ -43,7 +43,7 @@ theme.fg_focus      = tFg
 theme.fg_urgent     = tFg
 theme.fg_minimize   = tFg
 
-theme.useless_gap   = dpi(8)
+theme.useless_gap   = dpi(10)
 theme.border_width  = dpi(2)
 theme.border_normal = tBg
 theme.border_focus  = tPurple
