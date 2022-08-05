@@ -1,13 +1,13 @@
 -- STANDARD AWESOME LIBRARY {{{
 pcall(require, "luarocks.loader")
-local gears = require("gears")
-local awful = require("awful")
-require("awful.autofocus")
-local wibox = require("wibox")									-- Widget and layout library
-local beautiful = require("beautiful")							-- Theme handling library
-local naughty = require("naughty")								-- Notification library
-local menubar = require("menubar")
-local hotkeys_popup = require("awful.hotkeys_popup")
+require("awful.autofocus")       
+local gears                      = require("gears")
+local awful                      = require("awful")
+local wibox                      = require("wibox")									-- Widget and layout library
+local beautiful                  = require("beautiful")							-- Theme handling library
+local naughty                    = require("naughty")								-- Notification library
+local menubar                    = require("menubar")
+local hotkeys_popup              = require("awful.hotkeys_popup")
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
@@ -240,11 +240,6 @@ globalkeys = gears.table.join(
 		end,
 		{description = "Launch ranger", group = "apps"}),
 
-	awful.key({modkey, altkey}, "s", 
-		function ()
-			awful.util.spawn(default.image_viewer .. " -rt Wallpapers")
-		end,
-		{description = "Launch ranger", group = "apps"}),
 	awful.key({modkey, altkey}, "m",
 		function ()
 			awful.util.spawn(default.terminal .. " -e " .. default.email_client)
@@ -256,23 +251,12 @@ globalkeys = gears.table.join(
 		end,
 		{description = "Launch tg client", group = "apps"}),
 
-	-- MPD / MPC
-	awful.key({modkey, altkey}, "p",
-		function ()
-			awful.util.spawn("bash .scripts/player toggle")
+	awful.key({modkey,			}, "F2",
+		function()
+			awful.util.spawn("bash .scripts/rofi-mpc")
 		end,
-		{description = "Toggle song", group = "apps"}),
-	awful.key({modkey, altkey}, "]",
-		function ()
-			awful.util.spawn("bash .scripts/player next")
-		end,
-		{description = "Play next song", group = "apps"}),
-	awful.key({modkey, altkey}, "[",
-		function ()
-			awful.util.spawn("bash .scripts/player prev")
-		end,
-		{description = "Play previous song", group = "apps"}),
-	
+		{description = "Control mpd", group = "apps"}),
+
 	-- Brightness
 	awful.key({modkey}, "Next",
 		function ()

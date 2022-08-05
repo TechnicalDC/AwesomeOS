@@ -12,7 +12,5 @@ default.systerm_monitor = "htop"
 default.pdf_viewer = "zathura"
 default.player = "mpc"
 default.email_client = "neomutt"
-default.tg_client = "tg"
-
-
-
+default.tg_client = "arigram"
+default.calender = "calcurse"
