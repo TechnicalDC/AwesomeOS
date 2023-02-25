@@ -12,7 +12,7 @@ local hotkeys_popup              = require("awful.hotkeys_popup")
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
 
-local debian = require("debian.menu")							-- Load Debian menu entries
+-- local debian = require("debian.menu")							-- Load Debian menu entries
 local has_fdo, freedesktop = pcall(require, "freedesktop")
 -- }}}
 
@@ -20,23 +20,24 @@ local has_fdo, freedesktop = pcall(require, "freedesktop")
 
 awful.util.spawn("./.fehbg")
 awful.util.spawn("wal -R")
-awful.util.spawn("conky -c ~/.config/conky/conky-day")
+-- awful.util.spawn("conky -c ~/.config/conky/conky-day")
 awful.util.spawn("mpv --no-video ~/audio/SoundEffects/Computer_Magic-Microsift-1901299923.mp3")
 awful.util.spawn("nm-applet")
+awful.util.spawn("blueman-applet")
 -- awful.util.spawn("nitrogen --restore")
 awful.util.spawn("kdeconnect-indicator")
-awful.util.spawn("/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1")
+awful.util.spawn("/usr/libexec//polkit-gnome-authentication-agent-1")
 -- awful.util.spawn("volumeicon")
-awful.util.spawn("picom --experimental-backends")
+awful.util.spawn("picom")
 
 -- }}}
 
 -- MINE {{{
 require('defaults')
-require('modules.tags')
-require('modules.dashboard')
-require('modules.notification')
-local logout_popup = require('modules.logout-popup')
+-- require('modules.tags')
+-- require('modules.dashboard')
+-- require('modules.notification')
+-- local logout_popup = require('modules.logout-popup')
 -- }}}
 
 --  ERROR HANDLING {{{
@@ -92,21 +93,21 @@ mysystray.set_horizontal(true)
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
-                    awful.button({ }, 1, function(t) t:view_only() end),
-                    awful.button({ modkey }, 1, function(t)
-                                              if client.focus then
-                                                  client.focus:move_to_tag(t)
-                                              end
-                                          end),
-                    awful.button({ }, 3, awful.tag.viewtoggle),
-                    awful.button({ modkey }, 3, function(t)
-                                              if client.focus then
-                                                  client.focus:toggle_tag(t)
-                                              end
-                                          end),
-                    awful.button({ }, 4, function(t) awful.tag.viewnext(t.screen) end),
-                    awful.button({ }, 5, function(t) awful.tag.viewprev(t.screen) end)
-                )
+	awful.button({ }, 1, function(t) t:view_only() end),
+	awful.button({ modkey }, 1, function(t)
+		if client.focus then
+			client.focus:move_to_tag(t)
+		end
+	end),
+	awful.button({ }, 3, awful.tag.viewtoggle),
+	awful.button({ modkey }, 3, function(t)
+		if client.focus then
+			client.focus:toggle_tag(t)
+		end
+	end),
+	awful.button({ }, 4, function(t) awful.tag.viewnext(t.screen) end),
+	awful.button({ }, 5, function(t) awful.tag.viewprev(t.screen) end)
+	)
 
 -- local mybutton = 
 
@@ -183,7 +184,7 @@ end)
 
 --  MOUSE BINDINGS {{{
 root.buttons(gears.table.join(
-    awful.button({ }, 3, function () logout_popup.launch() end)
+    -- awful.button({ }, 3, function () logout_popup.launch() end)
     -- awful.button({ }, 4, awful.tag.viewnext),
     -- awful.button({ }, 5, awful.tag.viewprev)
 ))
@@ -356,7 +357,7 @@ globalkeys = gears.table.join(
     awful.key({ modkey, "Shift"   }, "q", 
 			function ()
 				-- awesome.quit
-				logout_popup.launch()
+				-- logout_popup.launch()
 			end,
               {description = "quit awesome", group = "awesome"}),
 
