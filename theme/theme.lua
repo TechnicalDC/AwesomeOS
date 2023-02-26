@@ -45,8 +45,8 @@ theme.fg_minimize   = tFg
 
 theme.useless_gap   = dpi(10)
 theme.border_width  = dpi(2)
-theme.border_normal = tBg
-theme.border_focus  = tBg
+theme.border_normal = tCyan
+theme.border_focus  = tPurple
 theme.border_marked = tGreen
 theme.snap_bg = tPurple
 theme.snap_border_width = dpi(2)

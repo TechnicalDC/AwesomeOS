@@ -1,10 +1,16 @@
 
 local gears = require("gears")
 local awful = require("awful")
-local wibox = require("wibox")									-- Widget and layout library
-local beautiful = require("beautiful")							-- Theme handling library
-local naughty = require("naughty")								-- Notification library
+-- local wibox = require("wibox")									-- Widget and layout library
+-- local beautiful = require("beautiful")							-- Theme handling library
+-- local naughty = require("naughty")								-- Notification library
 local menubar = require("menubar")
+local hotkeys_popup = require("awful.hotkeys_popup")
+local app = require('modules.applications')
+
+-- Default modkey.
+modkey = "Mod4"
+altkey = "Mod1"
 
 -- MOUSE BINDINGS {{{
 root.buttons(gears.table.join(
@@ -61,19 +67,19 @@ globalkeys = gears.table.join(
 
 	awful.key({modkey, altkey}, "r", 
 	function ()
-		awful.util.spawn(default.terminal .. " -e " .. default.filemanager)
+		awful.util.spawn(app.terminal .. " -e " .. app.filemanager)
 	end,
 	{description = "Launch ranger", group = "apps"}),
 
 	awful.key({modkey, altkey}, "n", 
 	function ()
-		awful.util.spawn(default.terminal .. " -e " .. default.text_editor)
+		awful.util.spawn(app.terminal .. " -e " .. app.text_editor)
 	end,
 	{description = "Launcg ranger", group = "apps"}),
 
 	awful.key({modkey, altkey}, "s", 
 	function ()
-		awful.util.spawn(default.image_viewer .. " -rt .")
+		awful.util.spawn(app.image_viewer .. " -rt .")
 	end,
 	{description = "Launcg ranger", group = "apps"}),
 
@@ -131,7 +137,7 @@ globalkeys = gears.table.join(
 	{description = "go back", group = "client"}),
 
 	-- Standard program
-	awful.key({ modkey,           }, "Return", function () awful.util.spawn(default.terminal) end,
+	awful.key({ modkey,           }, "Return", function () awful.util.spawn(app.terminal) end,
 	{description = "open a terminal", group = "launcher"}),
 	awful.key({ modkey, "Shift" }, "r", awesome.restart,
 	{description = "reload awesome", group = "awesome"}),
@@ -271,4 +277,3 @@ clientbuttons = gears.table.join(
 -- set keys
 root.keys(globalkeys)
 -- }}}
-

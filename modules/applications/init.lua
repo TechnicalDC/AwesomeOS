@@ -13,3 +13,5 @@ default.player = "mpc"
 default.email_client = "neomutt"
 default.tg_client = "arigram"
 default.calender = "calcurse"
+
+return default
