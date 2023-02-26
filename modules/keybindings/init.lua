@@ -1,16 +1,18 @@
 
+-- REQUIRE {{{
 local gears = require("gears")
 local awful = require("awful")
 -- local wibox = require("wibox")									-- Widget and layout library
 -- local beautiful = require("beautiful")							-- Theme handling library
 -- local naughty = require("naughty")								-- Notification library
-local menubar = require("menubar")
+-- local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup")
 local app = require('modules.applications')
 
 -- Default modkey.
 modkey = "Mod4"
 altkey = "Mod1"
+-- }}}
 
 -- MOUSE BINDINGS {{{
 root.buttons(gears.table.join(
@@ -20,7 +22,9 @@ root.buttons(gears.table.join(
 ))
 -- }}}
 
---  KEY BINDINGS {{{
+-- KEY BINDINGS {{{
+
+-- GLOBAL KEY BINDINGS {{{
 globalkeys = gears.table.join(
 	-- Application keys
 	awful.key({modkey,			 }, "d", 
@@ -171,13 +175,11 @@ globalkeys = gears.table.join(
 			)
 		end
 	end,
-	{description = "restore minimized", group = "client"}),
-
-	-- Menubar
-	awful.key({ modkey }, "p", function() menubar.show() end,
-	{description = "show the menubar", group = "launcher"})
+	{description = "restore minimized", group = "client"})
 )
+-- }}}
 
+-- CLIENT KEY BINDINGS {{{
 clientkeys = gears.table.join(
 	awful.key({ modkey,           }, "f",
 	function (c)
@@ -259,7 +261,9 @@ for i = 1, 9 do
 	{description = "toggle focused client on tag #" .. i, group = "tag"})
 	)
 end
+-- }}}
 
+-- CLIENT BUTTONS {{{
 clientbuttons = gears.table.join(
 	awful.button({ }, 1, function (c)
 		c:emit_signal("request::activate", "mouse_click", {raise = true})
@@ -273,6 +277,7 @@ clientbuttons = gears.table.join(
 		awful.mouse.client.resize(c)
 	end)
 )
+--}}} 
 
 -- set keys
 root.keys(globalkeys)
