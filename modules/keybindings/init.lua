@@ -27,66 +27,71 @@ root.buttons(gears.table.join(
 -- GLOBAL KEY BINDINGS {{{
 globalkeys = gears.table.join(
 	-- Application keys
-	awful.key({modkey,			 }, "d", 
+	awful.key({modkey,			 }, "d",
 	function ()
 		awful.util.spawn("rofi -show drun")
 	end,
 	{description = "Launcg rofi", group = "apps"}),
 
-	awful.key({modkey,			 }, "w", 
+	awful.key({modkey,			 }, "w",
 	function ()
 		awful.util.spawn("rofi -show window")
 	end,
 	{description = "Launch list open windows", group = "apps"}),
 
-	awful.key({modkey,			 }, "r", 
+	awful.key({modkey,			 }, "r",
 	function ()
 		awful.util.spawn("rofi -show run")
 	end,
 	{description = "Launch commands", group = "apps"}),
 
-	awful.key({modkey,			 }, "e", 
+	awful.key({modkey,			 }, "e",
 	function ()
-		awful.util.spawn("/home/dilip/.scripts/rofi-configmenu.sh")
+		awful.util.spawn("rofi-configmenu.sh")
 	end,
 	{description = "Launch config menu", group = "apps"}),
 
-	awful.key({modkey, altkey}, "q", 
+	awful.key({modkey, altkey}, "q",
 	function ()
-		awful.util.spawn("/home/dilip/.scripts/rofi-quickmarks.sh")
+		awful.util.spawn("rofi-quickmarks.sh")
 	end,
 	{description = "Launch quickmarks menu", group = "apps"}),
 
-	awful.key({}, "Print", 
+	awful.key({}, "Print",
 	function ()
-		awful.util.spawn("/home/dilip/.scripts/rofi-scrotmenu.sh")
+		awful.util.spawn("rofi-maim")
 	end,
 	{description = "Launch scrot menu", group = "apps"}),
 
-	awful.key({modkey, altkey}, "p",
-	function ()
-		awful.util.spawn("/home/dilip/.scripts/poly-picom.sh")
-	end,
-	{description = "Toggle picom", group = "apps"}),
+	-- awful.key({modkey, altkey}, "p",
+	-- function ()
+	-- 	awful.util.spawn("/home/dilip/.scripts/poly-picom.sh")
+	-- end,
+	-- {description = "Toggle picom", group = "apps"}),
 
-	awful.key({modkey, altkey}, "r", 
+	awful.key({modkey, altkey}, "r",
 	function ()
 		awful.util.spawn(app.terminal .. " -e " .. app.filemanager)
 	end,
 	{description = "Launch ranger", group = "apps"}),
 
-	awful.key({modkey, altkey}, "n", 
+	awful.key({modkey, altkey}, "n",
 	function ()
 		awful.util.spawn(app.terminal .. " -e " .. app.text_editor)
 	end,
 	{description = "Launcg ranger", group = "apps"}),
 
-	awful.key({modkey, altkey}, "s", 
+	awful.key({modkey, altkey}, "s",
 	function ()
 		awful.util.spawn(app.image_viewer .. " -rt .")
 	end,
 	{description = "Launcg ranger", group = "apps"}),
 
+	awful.key({modkey,				}, "F2",
+	function ()
+		awful.util.spawn("wally")
+	end,
+	{description = "Launcg wally", group = "apps"}),
 
 	-- Other Keys
 	awful.key({ modkey,           }, "F1",      hotkeys_popup.show_help,

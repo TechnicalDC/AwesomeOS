@@ -3,7 +3,7 @@
 default = {}
 
 default.terminal = "st"
-default.text_editor = "nvim"
+default.text_editor = os.getenv("EDITOR") or "nano"
 default.filemanager = "ranger"
 default.web_browser = "firefox"
 default.image_viewer = "sxiv"
