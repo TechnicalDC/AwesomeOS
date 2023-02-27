@@ -4,28 +4,28 @@
 require("gears")
 local gears = require("gears")
 
-local theme_assets = require("beautiful.theme_assets")
+-- local theme_assets = require("beautiful.theme_assets")
 local xresources = require("beautiful.xresources")
 local dpi = xresources.apply_dpi
 local x = xresources.get_current_theme()
 
-local gfs = require("gears.filesystem")
+-- local gfs = require("gears.filesystem")
 local themes_path = "/home/dilip/.config/awesome/theme/"
 
 local theme = {}
-local icon_path = themes_path .. "icons"
-local background_path = themes_path .. "background"
+-- local icon_path = themes_path .. "icons"
+-- local background_path = themes_path .. "background"
 
 -- COLOR
 -- tBg = "#282A36"
-tFg = x.foreground
-tBg = x.background
-tRed = x.color1
-tGreen = x.color2
-tYellow = x.color3
-tPurple = x.color4
-tMagenta = x.color5
-tCyan = x.color6
+local tFg = x.foreground
+local tBg = x.background
+local tRed = x.color1
+local tGreen = x.color2
+local tYellow = x.color3
+local tPurple = x.color4
+local tMagenta = x.color5
+local tCyan = x.color6
 
 theme.icon_font = "SauceCode Pro Nerd Font Mono 15"
 theme.font          = "Roboto 8"
@@ -43,7 +43,7 @@ theme.fg_focus      = tFg
 theme.fg_urgent     = tFg
 theme.fg_minimize   = tFg
 
-theme.useless_gap   = dpi(10)
+theme.useless_gap   = dpi(8)
 theme.border_width  = dpi(2)
 theme.border_normal = tCyan
 theme.border_focus  = tPurple
@@ -75,7 +75,7 @@ theme.taglist_fg_occupied = tGreen
 theme.taglist_bg_empty = tBg
 theme.taglist_fg_empty = tCyan
 theme.taglist_spacing = 0
-theme.taglist_font = "SauceCode Pro Nerd Font Mono 15"
+-- theme.taglist_font = "SauceCode Pro Nerd Font Mono 15"
 theme.taglist_disable_icon = false
 
 -- There are other variable sets

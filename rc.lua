@@ -24,8 +24,8 @@ require('modules.ui.notification')
 -- }}}
 
 -- AUTOSTART {{{
-awful.util.spawn("./.fehbg")
 awful.util.spawn("wal -R")
+awful.util.spawn("./.fehbg")
 -- awful.util.spawn("conky -c ~/.config/conky/conky-day")
 awful.util.spawn("mpv --no-video ~/audio/SoundEffects/Computer_Magic-Microsift-1901299923.mp3")
 awful.util.spawn("nm-applet")
