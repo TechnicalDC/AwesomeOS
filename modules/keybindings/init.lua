@@ -75,6 +75,12 @@ globalkeys = gears.table.join(
 	end,
 	{description = "Launch ranger", group = "apps"}),
 
+	awful.key({modkey, altkey}, "c",
+	function ()
+		awful.util.spawn(app.terminal .. " -e " .. app.calender)
+	end,
+	{description = "Launch calender", group = "apps"}),
+
 	awful.key({modkey, altkey}, "n",
 	function ()
 		awful.util.spawn(app.terminal .. " -e " .. app.text_editor)
