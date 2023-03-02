@@ -37,19 +37,21 @@ local urgency_color = {
     ['critical'] = x.color11,
 }
 
+local action_icon {
+	['cancel'] = "",
+	['reply'] = "",
+	['open'] = ""
+}
+
 local app_config = {
     -- ['battery'] = { icon = "", title = false },
     -- ['charger'] = { icon = "", title = false },
     -- ['volume'] = { icon = "", title = false },
     -- ['brightness'] = { icon = "", title = false },
-    ['screenshot'] = { icon = "", title = false },
-    ['Telegram Desktop'] = { icon = "切", title = true },
-    -- ['night_mode'] = { icon = "", title = false },
-    ['NetworkManager'] = { icon = "", title = true },
-    -- ['youtube'] = { icon = "", title = true },
+    -- ['screenshot'] = { icon = "", title = false },
+    -- ['Telegram Desktop'] = { icon = "切", title = true },
+    -- ['NetworkManager'] = { icon = "", title = true },
     -- ['mpd'] = { icon = "", title = true },
-    -- ['mpv'] = { icon = "", title = true },
-    -- ['keyboard'] = { icon = "", title = false },
     -- ['email'] = { icon = "", title = true },
 }
 
