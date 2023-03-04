@@ -3,7 +3,7 @@ local gears = require("gears")
 local naughty = require("naughty")
 local beautiful = require("beautiful")
 
-local wallblur_script = awful.util.getdir("config").."/widgets/dashboard/background/wallblur.sh" 
+local wallblur_script = awful.util.getdir("config").."/modules/ui/dashboard/background/wallblur.sh" 
 local command = wallblur_script.." -i "..beautiful.wallpaper
 
 local blur_wallpaper = function(dashboard)

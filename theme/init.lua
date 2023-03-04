@@ -18,14 +18,14 @@ local theme = {}
 
 -- COLOR
 -- tBg = "#282A36"
-local tFg = x.foreground
-local tBg = x.background
-local tRed = x.color1
-local tGreen = x.color2
-local tYellow = x.color3
-local tPurple = x.color4
-local tMagenta = x.color5
-local tCyan = x.color6
+theme.fg = x.foreground
+theme.bg = x.background
+theme.red = x.color1
+theme.green = x.color2
+theme.yellow = x.color3
+theme.purple = x.color4
+theme.magenta = x.color5
+theme.cyan = x.color6
 
 theme.icon_font = "SauceCode Pro Nerd Font Mono 15"
 theme.font          = "Roboto 8"
@@ -33,22 +33,22 @@ theme.wallpaper     = themes_path .. "background/wallpaper.jpg"
 
 theme.wibar_width = 28
 
-theme.bg_normal     = tBg
-theme.bg_focus      = tPurple
-theme.bg_urgent     = tRed
+theme.bg_normal     = theme.bg
+theme.bg_focus      = theme.purple
+theme.bg_urgent     = theme.red
 theme.bg_systray    = theme.bg_normal
 
-theme.fg_normal     = tFg
-theme.fg_focus      = tFg
-theme.fg_urgent     = tFg
-theme.fg_minimize   = tFg
+theme.fg_normal     = theme.fg
+theme.fg_focus      = theme.fg
+theme.fg_urgent     = theme.fg
+theme.fg_minimize   = theme.fg
 
 theme.useless_gap   = dpi(8)
 theme.border_width  = dpi(2)
-theme.border_normal = tCyan
-theme.border_focus  = tPurple
-theme.border_marked = tGreen
-theme.snap_bg = tPurple
+theme.border_normal = theme.cyan
+theme.border_focus  = theme.purple
+theme.border_marked = theme.green
+theme.snap_bg       = theme.purple
 theme.snap_border_width = dpi(2)
 theme.snap_shape = function(cr, w, h)
     gears.shape.rounded_rect(cr, w, h, dpi(0))
@@ -60,21 +60,21 @@ theme.calendar_start_sunday = true
 theme.calendar_long_weekdays = true
 
 -- TITLEBAR
-theme.titlebar_bg_normal = tYellow
-theme.titlebar_bg_focus = tPurple
-theme.titlebar_fg_focus = tFg
-theme.titlebar_fg_normal = tFg
+theme.titlebar_bg_normal = theme.yellow
+theme.titlebar_bg_focus  = theme.purple
+theme.titlebar_fg_focus  = theme.fg
+theme.titlebar_fg_normal = theme.fg
 
 -- TAGLIST
-theme.taglist_bg_focus = tBg 
-theme.taglist_fg_focus = tPurple 
-theme.taglist_bg_urgent = tBg
-theme.taglist_fg_urgent = tRed
-theme.taglist_bg_occupied = tBg 
-theme.taglist_fg_occupied = tGreen 
-theme.taglist_bg_empty = tBg
-theme.taglist_fg_empty = tCyan
-theme.taglist_spacing = 0
+theme.taglist_bg_focus    = theme.bg 
+theme.taglist_fg_focus    = theme.purple 
+theme.taglist_bg_urgent   = theme.bg
+theme.taglist_fg_urgent   = theme.red
+theme.taglist_bg_occupied = theme.bg 
+theme.taglist_fg_occupied = theme.green 
+theme.taglist_bg_empty    = theme.bg
+theme.taglist_fg_empty    = theme.cyan
+theme.taglist_spacing     = 0
 -- theme.taglist_font = "SauceCode Pro Nerd Font Mono 15"
 theme.taglist_disable_icon = false
 

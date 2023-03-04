@@ -85,7 +85,7 @@ local update_widget = function(widget, stdout, stderr)
     icon_widget.markup = "<span foreground='"..beautiful.fg_normal.."'>"..icon.."</span>"
 end
 
-local api_key_path = awful.util.getdir("config") .. "widgets/dashboard/weather/openweathermap.txt"
+local api_key_path = awful.util.getdir("config") .. "modules/ui/dashboard/weather/openweathermap.txt"
 awful.spawn.easy_async_with_shell("cat "..api_key_path, function(stdout)
     local api_key = stdout:gsub("\n", "")
 

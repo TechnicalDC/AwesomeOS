@@ -5,7 +5,7 @@ local dpi = beautiful.xresources.apply_dpi
 
 local apps = require("config.apps")
 
-local drawBox = require("widgets.dashboard.drawBox")
+local drawBox = require("modules.ui.dashboard.drawBox")
 
 local text = wibox.widget {
     text = "CONFIG", 
