@@ -16,3 +16,5 @@ AwesomeOS is my configuration for [awesome](https://awesomewm.org/) window manag
 ## Screenshot
 ![cast](https://github.com/TechnicalDC/AwesomeOS/blob/main/res/awesome.gif)
 
+## Credits
+[drahenprofi](https://github.com/drahenprofi/dotfiles)
